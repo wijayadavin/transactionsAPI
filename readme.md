@@ -1,4 +1,4 @@
-# Welcome to Team C's Transaction API!
+# Welcome to the C TEAM Food Stores API!
 ## How to run the project
 You need to install required dependencies (libraries) by typing in the terminal
 ```bash
