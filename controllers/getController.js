@@ -14,8 +14,7 @@ const db = require("../connections/dbConnection")
  * 
  * @param {String} tableName choose table
  * @param {Object} query data structure to search
- * @returns {Array} Retuns an `array` if there's more than one found
- * @returns {Object} Returns an `object` if only one found
+ * @returns {Array} Retuns an `array` of `objects`
  * @returns {undefined} Returns `undefined` if nothing found
  */
 function getData(tableName, query) {
