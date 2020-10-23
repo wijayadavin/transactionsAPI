@@ -14,10 +14,10 @@ Then you can run this project by:
   npm run dev
   ```
   
+----------
   
   
 ## Current features
-----------
 
 ### Type of users:
 
