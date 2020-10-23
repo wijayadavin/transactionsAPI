@@ -13,8 +13,11 @@ Then you can run this project by:
   ```bash
   npm run dev
   ```
-----------
+  
+  
+  
 ## Current features
+----------
 
 ### Type of users:
 
