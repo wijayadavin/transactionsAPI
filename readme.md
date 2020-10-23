@@ -14,6 +14,15 @@ Then you can run this project by:
   npm run dev
   ```
 ----------
+## New features
+### Detailed function usage
+![Detailed function usage](detailedFunctionUsage.gif)
+
+### Auto import function
+![Auto import function](autoImportFunction.gif)
+Auto import can be used in all of controller, middleware, and helper functions
+
+----------
 ## Understanding the codebase
 After your lead fork this project and invites the member, your team should read the code first and make the code easier to understand by giving nessesarry comments, remember! **A good teamwork requires a good chair**, make the code easier to understand gives your team agility to create features!
 
