@@ -1,8 +1,8 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
 
 // now, we don't need body-parser, express has their built-in body parser
-app.use(express.json())
+app.use(express.json());
 
 /**
  * ⚠️ Propietary code! Do not change! ⚠️
@@ -11,20 +11,20 @@ app.use(express.json())
  * Reference: https://www.npmjs.com/package/read-dir-deep
  */
 const readDir = require('read-dir-deep');
-const path = require('path')
-const routesPath = path.resolve('routes')
-const filePaths = readDir.readDirDeepSync(routesPath)
+const path = require('path');
+const routesPath = path.resolve('routes');
+const filePaths = readDir.readDirDeepSync(routesPath);
 filePaths.forEach((filePath) => {
-  const relativeFilePath = `./${filePath}`
+  const relativeFilePath = `./${filePath}`;
   console.log(`${relativeFilePath} loaded!`);
-  const route = require(relativeFilePath)
-  app.use(route)
-})
+  const route = require(relativeFilePath);
+  app.use(route);
+});
 
 
 // it's always a good idea to make a port variable
 // because if you change the port, you also change the console.log()
-const port = 3000
+const port = 3000;
 app.listen(3000, () => {
   console.log(`The app was listening in http://localhost:${port}`);
-})
+});
