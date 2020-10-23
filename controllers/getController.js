@@ -24,7 +24,7 @@ function getData(tableName, query) {
   // use cloneDeep() the result variable will be referenced
   // deep to the NodeJs memory, in short, it will cause a nasty bug!
   const result = db.get(tableName)
-    .find(query)
+    .filter(query)
     .cloneDeep()
     .value()
   return result
