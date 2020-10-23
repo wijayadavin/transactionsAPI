@@ -1,4 +1,4 @@
-# Welcome to the C-TEAM Food Stores API!
+# Welcome to the C-Team Food Stores API!
 ## How to run the project
 You need to install required dependencies (libraries) by typing in the terminal
 ```bash
