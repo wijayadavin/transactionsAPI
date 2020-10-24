@@ -11,7 +11,7 @@ app.post('/auth/login', (req, res) => {
     // Set a token for admin users:
     if (req.body.username == 'admin') {
       const payload = {
-        id: req.body.id,
+        id: result[0].id,
         permissions: 'userLevel: 2',
       };
       result[0].token = auth.signJwt(payload);
