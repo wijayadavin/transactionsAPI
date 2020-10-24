@@ -34,7 +34,7 @@ function editData(tableName, id, data) {
     if (!shapedData) return false;
 
     db.get(tableName)
-        .find(id)
+        .find({id})
         .assign(shapedData)
         .write();
 
