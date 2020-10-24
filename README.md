@@ -43,4 +43,4 @@ Register as a user to get access to these sites:
 
 
 # B. Database schema:
-<img src="https://i.ibb.co/txCPw14/Schema.png" alt="Schema" border="0">
+<img src="https://i.ibb.co/N2tM7SW/Screenshot-from-2020-10-24-17-15-49.png" alt="Screenshot-from-2020-10-24-17-15-49" border="0">
