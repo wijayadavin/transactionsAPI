@@ -12,9 +12,9 @@ Anyone can browse foods and restaurants from our web:
 #### **/auth/login**
 - LOGIN with registered username and password
 #### **/menus**
-- READ all menus in our web
+- READ all menus in our web (i.e. menu name, price, and restaurant name)
 #### **/restaurants**
-- READ all restaurants in our web
+- READ all restaurants in our web (i.e. restaurant name and address)
 - Note: Listings are made manually by admin for now
 
 
@@ -26,9 +26,8 @@ Register as a user to get access to these sites:
 - The user can CREATE multiple menu items (from one restaurant only)
 #### **/orders**
 - READ user's order history (not other users)
-- READ user's current order (not other users)
+- READ user's current order and total amount (not other users)
 - CREATE a new order after finished adding order items
-- The user will get the total amount that he/she ordered
 - Note: User may change the order status into checkout then wait for the food to be delivered and pay it by cash,
 - other order statuses (e.g. on-process, delivering, delivered,paid, etc.) will made manually by admin for now.
 
