@@ -18,7 +18,7 @@ Anyone can browse foods and restaurants from our web:
 - Note: Listings are made manually by admin for now
 
 
-## A.2. Authorization system
+## A.2. User-only:
 Register as a user to get access to these sites:
 #### **/profile**
 - READ & UPDATE user's profile (not other users)
@@ -28,7 +28,7 @@ Register as a user to get access to these sites:
 - CRUD orders with status draft
 - READ orders with status != draft
 
-## A.3. Admin system
+## A.3. Admin-only:
 - for admin users, get access to special permissions:
 #### **/admin/users**:
 - CRUD  users
