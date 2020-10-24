@@ -31,15 +31,15 @@ Register as a user to get access to these sites:
 ## A.3. Admin system
 - for admin users, get access to special permissions:
 #### **/admin/users**:
-CRUD  users
+- CRUD  users
 #### **/admin/restaurants**:
-CRUD  restaurants
+- CRUD  restaurants
 #### **/admin/menus**:
-CRUD menus
+- CRUD menus
 #### **/admin/orders**:
-CRUD transactions
+- CRUD transactions
 #### **/admin/orderItems**:
-CRUD transactions
+- CRUD transactions
 
 
 # B. Database schema:
