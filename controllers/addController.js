@@ -1,7 +1,11 @@
 const db = require('../connections/dbConnection');
 const shapeObject = require('../helpers/shapeObjectHelper');
+const menuModel = require('../models/menuModel');
+const orderItemModel = require('../models/orderItemModel');
 const orderModel = require('../models/orderModel');
+const restaurantModel = require('../models/restaurantModel');
 const userModel = require('../models/userModel');
+
 
 /**
  * Add data to database
@@ -24,10 +28,19 @@ function addData(tableName, data) {
   if (typeof data.id !== 'string') return false;
 
   let shapedData;
-  if (tableName == 'transaction') {
+  if (tableName == 'menus') {
+    shapedData = shapeObject(data, menuModel);
+  }
+  if (tableName == 'orderItems') {
+    shapedData = shapeObject(data, orderItemModel);
+  }
+  if (tableName == 'orders') {
     shapedData = shapeObject(data, orderModel);
   }
-  if (tableName == 'user') {
+  if (tableName == 'restaurants') {
+    shapedData = shapeObject(data, restaurantModel);
+  }
+  if (tableName == 'users') {
     shapedData = shapeObject(data, userModel);
   }
 
@@ -38,4 +51,6 @@ function addData(tableName, data) {
       .write();
   return data;
 }
+
+
 module.exports = addData;
