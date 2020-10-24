@@ -1,6 +1,7 @@
 module.exports = [
   'id',
   'userId',
-  'name',
-  'nominal'
-]
+  'status',
+  'nominal',
+  'date',
+];
