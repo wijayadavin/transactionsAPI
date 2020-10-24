@@ -30,7 +30,7 @@ Register as a user to get access to these sites:
 - CREATE a new order after finished adding order items
 - The user will get the total amount that he/she ordered
 - Note: User may change the order status into checkout then wait for the food to be delivered and pay it by cash,
-other order statuses (e.g. on-process, delivering, delivered,paid, etc.) will made manually by admin for now.
+- other order statuses (e.g. on-process, delivering, delivered,paid, etc.) will made manually by admin for now.
 
 ## A.3. Admin system
 - for admin users, get access to special permissions:
