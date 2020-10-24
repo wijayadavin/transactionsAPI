@@ -25,8 +25,8 @@ Register as a user to get access to these sites:
 #### **/orders/items**
 - CRUD order items
 #### **/orders**
-CRUD orders with status draft
-READ orders with status != draft
+- CRUD orders with status draft
+- READ orders with status != draft
 
 ## A.3. Admin system
 - for admin users, get access to special permissions:
