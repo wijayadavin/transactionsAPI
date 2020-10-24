@@ -7,7 +7,7 @@ app.get('/profile', (req, res) => {
     const query = req.query
     const id = req.user.id
     query.userId = id
-    const result = db.get('users', query)
+    const result = getData('users', query)
     res.send(result)
 })
 
