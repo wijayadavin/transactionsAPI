@@ -14,4 +14,3 @@ app.get("/profile", (req, res) => {
 })
 
 module.exports = app
-
