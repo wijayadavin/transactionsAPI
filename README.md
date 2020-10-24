@@ -23,13 +23,10 @@ Register as a user to get access to these sites:
 #### **/profile**
 - READ & UPDATE user's profile (not other users)
 #### **/orders/items**
-- The user can CREATE multiple menu items (from one restaurant only)
+- CRUD order items
 #### **/orders**
-- READ user's order history (not other users)
-- READ user's current order and total amount (not other users)
-- CREATE a new order after finished adding order items
-- Note: User may change the order status into checkout then wait for the food to be delivered and pay it by cash,
-- other order statuses (e.g. on-process, delivering, delivered,paid, etc.) will made manually by admin for now.
+CRUD orders with status draft
+READ orders with status != draft
 
 ## A.3. Admin system
 - for admin users, get access to special permissions:
