@@ -12,8 +12,6 @@ app.get("/profile", (req, res) => {
         res.status(404).send('Data not found')
         return
 
-    } else if (result) {
-        res.send(result)
     } else {
         res.send(getData('users'))
     }
