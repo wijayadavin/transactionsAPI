@@ -7,6 +7,9 @@ app.get('/menus', (req, res) => {
     const id = req.user.id
     query.usersId = id
     const result = getData('menus', query)
+    if (!result) {
+        res.status(404).send('Data not found')
+    }
     res.send(result)
 })
 
