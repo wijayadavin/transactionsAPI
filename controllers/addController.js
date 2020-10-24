@@ -1,40 +1,56 @@
-const db = require("../connections/dbConnection")
-const shapeObject = require("../helpers/shapeObjectHelper")
-const transactionModel = require("../models/transactionModel")
-const userModel = require("../models/userModel")
+const db = require('../connections/dbConnection');
+const shapeObject = require('../helpers/shapeObjectHelper');
+const menuModel = require('../models/menuModel');
+const orderItemModel = require('../models/orderItemModel');
+const orderModel = require('../models/orderModel');
+const restaurantModel = require('../models/restaurantModel');
+const userModel = require('../models/userModel');
+
 
 /**
  * Add data to database
- * 
+ *
  * Usage example:
- * 
+ *
  *    add('transaction', { id: "1", nominal: 3000 })
  *    // 👆 add data by id "1" and nominal 3000
- * 
+ *
  * @param {String} tableName choose table
  * @param {Object} data data to insert
- * @returns {Object} Returns an `object` if successfully added
- * @returns {Boolean} Retuns `false` if id wasn't string, not found, or data object keys was lacking
+ * @return {Object} Returns an `object` if successfully added
+ * @return {Boolean} Retuns `false` if id wasn't string,\
+ * not found, or data object keys was lacking
  */
 function addData(tableName, data) {
   // if you only have one line code inside an if
   // you can shorten it like this 👇
-  if (!data.id) return false
-  if (typeof data.id !== 'string') return false
+  if (!data.id) return false;
+  if (typeof data.id !== 'string') return false;
 
   let shapedData;
-  if (tableName == 'transaction') {
-    shapedData = shapeObject(data, transactionModel)
+  if (tableName == 'menus') {
+    shapedData = shapeObject(data, menuModel);
   }
-  if (tableName == 'user') {
-    shapedData = shapeObject(data, userModel)
+  if (tableName == 'orderItems') {
+    shapedData = shapeObject(data, orderItemModel);
+  }
+  if (tableName == 'orders') {
+    shapedData = shapeObject(data, orderModel);
+  }
+  if (tableName == 'restaurants') {
+    shapedData = shapeObject(data, restaurantModel);
+  }
+  if (tableName == 'users') {
+    shapedData = shapeObject(data, userModel);
   }
 
-  if (!shapedData) return false
+  if (!shapedData) return false;
 
   db.get(tableName)
-    .push(shapedData)
-    .write()
-  return data
+      .push(shapedData)
+      .write();
+  return data;
 }
-module.exports = addData
+
+
+module.exports = addData;
