@@ -5,26 +5,26 @@ by Team C of Binar Academy batch 8
 # A. Features
 ## A.1. Open for public
 Anyone can browse foods and restaurants from our web:
-### **/**
+#### **/**
 - hello world!
-### **/auth/register**
+#### **/auth/register**
 - CREATE a new user account, simply put your first name, last name, username, and password
-### **/auth/login**
+#### **/auth/login**
 - LOGIN with registered username and password
-### **/menus**
+#### **/menus**
 - READ all menus in our web
-### **/restaurants**
+#### **/restaurants**
 - READ all restaurants in our web
 - Note: Listings are made manually by admin for now
 
 
 ## A.2. Authorization system
 Register as a user to get access to these sites:
-### **/profile**
+#### **/profile**
 - READ & UPDATE user's profile (not other users)
-### **/orders/items**
+#### **/orders/items**
 - The user can CREATE multiple menu items (from one restaurant only)
-### **/orders**
+#### **/orders**
 - READ user's order history (not other users)
 - READ user's current order (not other users)
 - CREATE a new order after finished adding order items
@@ -34,15 +34,15 @@ Register as a user to get access to these sites:
 
 ## A.3. Admin system
 - for admin users, get access to special permissions:
-### **/admin/users**:
+#### **/admin/users**:
 CRUD  users
-### **/admin/restaurants**:
+#### **/admin/restaurants**:
 CRUD  restaurants
-### **/admin/menus**:
+#### **/admin/menus**:
 CRUD menus
-### **/admin/orders**:
+#### **/admin/orders**:
 CRUD transactions
-### **/admin/orderItems**:
+#### **/admin/orderItems**:
 CRUD transactions
 
 
