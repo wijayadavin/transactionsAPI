@@ -6,16 +6,18 @@ const app = express.Router();
 
 app.post('/auth/login', (req, res) => {
   const result = getData('users', req.body);
+
   if (result) {
     // Set a token for admin users:
-    if (result.username == 'admin') {
+    if (req.body.username == 'admin') {
       const payload = {
         username: req.body.username,
         permissions: 'userLevel: 2',
       };
-      result.token = auth.signJwt(payload);
-      res.send(result);
+      result[0].token = auth.signJwt(payload);
+      return res.send(result);
     }
+
     // if not admin then set a token for normal users:
     const payload = {
       username: req.body.username,

@@ -25,6 +25,6 @@ filePaths.forEach((filePath) => {
 // it's always a good idea to make a port variable
 // because if you change the port, you also change the console.log()
 const port = 3000;
-app.listen(3000, () => {
+app.listen(port, () => {
   console.log(`The app was listening in http://localhost:${port}`);
 });
