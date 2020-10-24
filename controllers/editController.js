@@ -46,7 +46,7 @@ function editData(tableName, id, data) {
 
     if (!shapedData) return false;
 
-    db.get(tableName).find(id).assign(shapedData).write();
+    db.get(tableName).find({ id }).assign(shapedData).write();
 
     return data;
   } else {
