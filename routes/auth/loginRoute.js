@@ -23,7 +23,7 @@ app.post('/auth/login', (req, res) => {
       username: req.body.username,
       permissions: 'userLevel: 1',
     };
-    result.token = auth.signJwt(payload);
+    result[0].token = auth.signJwt(payload);
     res.send(result);
   } else {
     res.status(400).send('Bad request');

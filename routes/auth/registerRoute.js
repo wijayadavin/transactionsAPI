@@ -1,6 +1,6 @@
 const express = require('express');
 const addData = require('../../controllers/addController');
-const getData = require('../../controllers/getController');
+
 const app = express.Router();
 // uid is a id generator library
 // Reference: https://www.npmjs.com/package/uid
