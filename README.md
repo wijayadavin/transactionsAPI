@@ -38,7 +38,7 @@ Register as a user to get access to these sites:
 - CRUD menus
 #### **/admin/orders**:
 - CRUD transactions
-#### **/admin/orderItems**:
+#### **/admin/orders/items**:
 - CRUD transactions
 
 
