@@ -1,23 +1,24 @@
-const express = require("express")
-const editData = require("../../controllers/editController")
-const getData = require("../../controllers/getController")
-const app = express.Router()
-const auth = require('../../middlewares/jwtMiddleware')
+const express = require('express');
+const router = express.Router();
+const getData = require('../../controllers/getController')
+const editData = require('../../controllers/editController');
+const auth = require('../../middlewares/jwtMiddleware');
 
-app.patch("/profile",
+router.patch('/profile',
     auth.verifyJwt('userLevel: 1'), (req, res) => {
+        const result = editData('users', req.query.id, req.body);
         const body = req.body
-        const { id, username } = body
-        const isUsernameExist = getData('users', username)
+        const username = getData('users', body.username)
 
-        if (!isUsernameExist) {
-            res.status(409).send('You insert an existed Username')
+        if (username && Object.keys(username).length) {
+            res.status(400).send('Username is existed')
+        } else if (!result) {
+            res.status(400).send('Bad request');
         } else {
-            editData('users', id, body)
-            body.id = id
-            res.send(body)
-            return
+            res.send(result);
         }
-    })
+        return;
+    });
 
-module.exports = app
+
+module.exports = router;
