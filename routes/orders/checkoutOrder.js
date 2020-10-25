@@ -7,7 +7,7 @@ const getData = require('../../controllers/getController');
 
 app.patch('/orders',
     auth.verifyJwt('userLevel: 1'), (req, res) => {
-      // Find order data by id from the requested query:
+      // Firstly, let's find order data by id from the requested query:
       foundOrderData = getData('orders', {id: req.query.id});
 
       /**
@@ -16,6 +16,7 @@ app.patch('/orders',
        *              user's id from the token
        */
       if (foundOrderData && foundOrderData[0].userID == req.user.id) {
+        // Condition 1 & 2 are ok? then let's edit the data:
         const result = editData(
             'orders',
             req.query.id,
@@ -29,18 +30,19 @@ app.patch('/orders',
         );
 
         if (!result) {
-          // if failed:
+          // If failed:
           res.sendStatus(400).send('Bad request');
         } else {
-          // if succeeded:
+          // If succeeded:
           res.send(result);
         }
       } else {
-        // if Condition 1 && condition 2 == false:
+        // If condition 1 & 2 are not ok, then send error:
         res.sendStatus(404).send('Error: Not found');
       }
 
       return;
     });
+
 
 module.exports = app;

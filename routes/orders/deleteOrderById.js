@@ -7,24 +7,34 @@ const app = express.Router();
 
 app.delete('/orders',
     auth.verifyJwt('userLevel: 1'), (req, res) => {
-      // find order data by id from the requested query
+      // Firstly, let's find order data by id from the requested query:
       const foundOrderData = getData('orders', req.query);
 
+      /**
+       * Condition 1: The order data is available in the Database
+       * Condition 2: The userID in requested order data is the same with
+       *              user's id from the token
+       */
       if (foundOrderData && foundOrderData[0].userID == req.user.id) {
+        // Condition 1 & 2 are ok? then let's remove the data:
         const result = removeData.removeDataByQuery(
             'orders',
             req.query,
         );
 
         if (result) {
+          // If succeeded:
           res.send('The order was successfully deleted');
         } else {
-          res.status(400).send('not found');
+          // If not succeeded:
+          res.status(400).send('Bad request');
         }
       } else {
-        res.status(400).send('bad request');
+        // If condition 1 & 2 are not ok, then send error:
+        res.status(404).send('Error: Not found');
       }
       return;
     });
+
 
 module.exports = app;

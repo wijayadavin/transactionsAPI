@@ -53,9 +53,9 @@ function fromHeaderOrQuerystring(req) {
  *    app.post('/admin/menus',
  *    auth.verifyJwt('userLevel: 2'), (req, res) => {}
  *
- * // this example means the /admin/menus route
- * // may only be accessed by user with permission: 'userLevel: 2'
- * // permission will be declared automatically in login
+ * this example means the /admin/menus route
+ * may only be accessed by user with permission: 'userLevel: 2'
+ * permission will be declared automatically in login
  *
  * @param {String|Array} credentials the credentials required
  * @return {any} if the permission is okay, \

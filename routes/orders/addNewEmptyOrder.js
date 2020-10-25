@@ -5,9 +5,10 @@ const auth = require('../../middlewares/jwtMiddleware');
 const app = express.Router();
 const getToday = require('../../helpers/getTodayHelper');
 
+
 app.post('/orders',
     auth.verifyJwt('userLevel: 1'), (req, res) => {
-      // generate a new empty order:
+      // Generate a new empty order:
       newOrder = {
         id: uid(),
         userID: req.user.id,
@@ -16,7 +17,7 @@ app.post('/orders',
         nominal: '0',
       };
 
-      // push it to the database:
+      // Push it to the database:
       const result = addData('orders', newOrder);
 
       if (!result) {
@@ -27,5 +28,6 @@ app.post('/orders',
         res.send(result);
       }
     });
+
 
 module.exports = app;
