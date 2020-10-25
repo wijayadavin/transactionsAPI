@@ -26,8 +26,8 @@ function editData(tableName, id, data) {
   if (!id) return false;
   if (typeof id !== 'string') return false;
   const searchResult = db.get(tableName)
-      .find({id})
-      .value();
+    .find({ id })
+    .value();
   if (searchResult) {
     let shapedData;
     data.id = id;
