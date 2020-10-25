@@ -1,7 +1,7 @@
 const express = require("express")
-const editData = require("../../../controllers/editController")
+const editData = require("../../controllers/editController")
 const app = express.Router()
-const auth = require('../../../middlewares/jwtMiddleware')
+const auth = require('../../middlewares/jwtMiddleware')
 
 app.patch("/profile",
     auth.verifyJwt('userLevel: 1'), (req, res) => {

@@ -1,7 +1,7 @@
 const express = require("express")
 const getData = require("../../controllers/getController")
 const app = express.Router()
-const auth = require('../../../middlewares/jwtMiddleware')
+const auth = require('../../middlewares/jwtMiddleware')
 
 app.get("/profile",
     auth.verifyJwt('userLevel: 1'), (req, res) => {
