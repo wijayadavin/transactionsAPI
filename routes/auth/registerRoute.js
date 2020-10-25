@@ -1,15 +1,16 @@
 const express = require('express');
 const addData = require('../../controllers/addController');
-const getData = require('../../controllers/getController');
+
 const app = express.Router();
 // uid is a id generator library
 // Reference: https://www.npmjs.com/package/uid
 const uid = require('uid');
 
 app.post('/auth/register', (req, res) => {
-  const body = req.body;
-  body.id = uid();
-  const result = addData('users', body);
+  req.body.id = uid();
+  req.body.level = 1;
+  const result = addData('users', req.body);
+
   if (result) {
     res.send(result);
   } else {

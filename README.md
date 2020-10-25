@@ -18,29 +18,29 @@ Anyone can browse foods and restaurants from our web:
 - Note: Listings are made manually by admin for now
 
 
-## A.2. Authorization system
+## A.2. User-only:
 Register as a user to get access to these sites:
 #### **/profile**
 - READ & UPDATE user's profile (not other users)
 #### **/orders/items**
 - CRUD order items
 #### **/orders**
-CRUD orders with status draft
-READ orders with status != draft
+- CRUD orders with status draft
+- READ orders with status != draft
 
-## A.3. Admin system
+## A.3. Admin-only:
 - for admin users, get access to special permissions:
 #### **/admin/users**:
-CRUD  users
+- CRUD  users
 #### **/admin/restaurants**:
-CRUD  restaurants
+- CRUD  restaurants
 #### **/admin/menus**:
-CRUD menus
+- CRUD menus
 #### **/admin/orders**:
-CRUD transactions
-#### **/admin/orderItems**:
-CRUD transactions
+- CRUD transactions
+#### **/admin/orders/items**:
+- CRUD transactions
 
 
 # B. Database schema:
-<img src="https://i.ibb.co/txCPw14/Schema.png" alt="Schema" border="0">
+<img src="https://i.ibb.co/N2tM7SW/Screenshot-from-2020-10-24-17-15-49.png" alt="Screenshot-from-2020-10-24-17-15-49" border="0">
