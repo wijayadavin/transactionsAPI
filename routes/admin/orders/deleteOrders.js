@@ -1,20 +1,18 @@
 const express = require("express");
 const removeData = require("../../../controllers/removeController");
+const auth = require("../../../middlewares/jwtMiddleware");
 const app = express.Router();
 
-app.delete("/admin/orders", (req, res) => {
-  const id = req.query.id;
+app.delete("/admin/orders", auth.verifyJwt("userLevel: 2"), (req, res) => {
   const query = req.query;
-  if (id) {
-    removeData.removeDataById("orders", id);
-  }
+  const result = removeData.removeDataByQuery("orders", query);
 
-  if (query) {
-    removeData.removeDataByQuery("orders", query);
+  if (result) {
+    res.send("order has been deleted");
   } else {
-    res.status(400).send("bad request");
+    res.status(400).send("not found");
   }
-  res.send("ok");
+  return;
 });
 
 module.exports = app;
