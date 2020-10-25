@@ -1,18 +1,18 @@
-const express = require('express')
-const app = express.Router()
-const db = require('../../../controllers/getController')
-const authorization = require('../../../middlewares/jwtMiddleware')
 
-app.get('/admin/users', authorization, (req, res) => {
+const express = require("express")
+const getData = require("../../../controllers/getController")
+const app = express.Router()
+
+app.get("/admin/users", (req, res) => {
     const query = req.query
-    const id = req.user.id
-    query.userId = id
-    const result = db.get('user', query)
+    const result = getData('users', query)
+
     if (!result) {
         res.status(404).send('Data not found')
-    }
-    res.send(result)
-})
 
+    } else {
+        res.send(result)
+    }
+})
 
 module.exports = app

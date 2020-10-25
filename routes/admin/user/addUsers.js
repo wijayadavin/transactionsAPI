@@ -1,22 +1,19 @@
-const express = require('express')
+
+const express = require("express")
+const addData = require("../../../controllers/addController")
+const uid = require("uid")
 const app = express.Router()
-const addData = require('../../../controllers/addController')
-// const authorization = require('../../../middlewares/jwtMiddleware')
 
-// app.use(authorization.verifyJwt)
-app.post('/admin/users', (req, res) => {
-    // console.log(authorization)
+app.post("/admin/users", (req, res) => {
     const body = req.body
-    // body.userId = req.user.id
-    const result = addData('user', body)
-    if (!result) {
-        res.status(400).send('Wrong body')
-    } else {
+    body.id = uid()
+    const result = addData("users", body)
+
+    if (result) {
         res.send(result)
-        return
+    } else {
+        res.status(404).send('Data not found')
     }
-
 })
-
 
 module.exports = app
