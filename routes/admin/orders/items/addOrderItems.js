@@ -6,9 +6,8 @@ const app = express.Router();
 
 app.post('/admin/orders/items',
     auth.verifyJwt('userLevel: 2'), (req, res) => {
-      const body = req.body;
       body.id = uid();
-      const result = addData('orderItems', body);
+      const result = addData('orderItems', req.body);
 
       if (!result) {
         res.status(400).send('Wrong body');

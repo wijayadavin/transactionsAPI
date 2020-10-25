@@ -5,10 +5,17 @@ const auth = require('../../../middlewares/jwtMiddleware');
 
 app.patch('/admin/users',
     auth.verifyJwt('userLevel: 2'), (req, res) => {
-      const body = req.body;
-      const id = req.query.id;
-      const result = editData('users', id, body);
-      res.send(result);
+      const result = editData(
+          'users',
+          req.query.id,
+          req.body);
+
+      if (!result) {
+        res.status(400).send('Bad request');
+      } else {
+        res.send(result);
+      }
+      return;
     });
 
 module.exports = app;

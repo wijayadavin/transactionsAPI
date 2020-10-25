@@ -5,9 +5,9 @@ const app = express.Router();
 
 app.delete(
     '/admin/orders/items',
-    auth.verifyJwt('userLevel: 2'),
-    (req, res) => {
+    auth.verifyJwt('userLevel: 2'), (req, res) => {
       const result = removeData.removeDataByQuery('orderItems', req.query);
+
       if (result) {
         res.send('order has been deleted');
       } else {

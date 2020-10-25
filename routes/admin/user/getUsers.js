@@ -6,8 +6,7 @@ const auth = require('../../../middlewares/jwtMiddleware');
 
 app.get('/admin/users',
     auth.verifyJwt('userLevel: 2'), (req, res) => {
-      const query = req.query;
-      const result = getData('users', query);
+      const result = getData('users', req.query);
 
       if (!result) {
         res.status(404).send('Data not found');

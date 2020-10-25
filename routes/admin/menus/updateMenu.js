@@ -7,7 +7,10 @@ const auth = require('../../../middlewares/jwtMiddleware');
 
 router.patch('/admin/menus',
     auth.verifyJwt('userLevel: 2'), (req, res) => {
-      const result = editData('menus', req.body.id, req.body);
+      const result = editData('menus',
+          req.body.id,
+          req.body,
+      );
 
       if (!result) {
         res.status(400).send('Bad request');

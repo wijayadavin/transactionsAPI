@@ -4,9 +4,11 @@ const auth = require('../../../../middlewares/jwtMiddleware');
 const app = express.Router();
 
 app.patch('/admin/orders/items', auth.verifyJwt('userLevel: 2'), (req, res) => {
-  const body = req.body;
-  const id = req.query.id;
-  const result = editData('orderItems', id, body);
+  const result = editData(
+      'orderItems',
+      req.query.id,
+      req.body,
+  );
 
   if (!result) {
     res.status(400).send('Bad request');
