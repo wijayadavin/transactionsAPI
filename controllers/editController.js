@@ -1,10 +1,11 @@
 const db = require('../connections/dbConnection');
-const shapeObject = require("../helpers/shapeObjectHelper");
-const menuModel = require("../models/menuModel");
-const orderItemModel = require("../models/orderItemModel");
-const orderModel = require("../models/orderModel");
-const restaurantModel = require("../models/restaurantModel");
-const userModel = require("../models/userModel");
+const shapeObject = require('../helpers/shapeObjectHelper');
+const menuModel = require('../models/menuModel');
+const orderItemModel = require('../models/orderItemModel');
+const orderModel = require('../models/orderModel');
+const restaurantModel = require('../models/restaurantModel');
+const userModel = require('../models/userModel');
+
 
 /**
  * Edit data

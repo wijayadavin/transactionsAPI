@@ -11,7 +11,7 @@ app.post('/auth/login', (req, res) => {
     // Set a token for admin users:
     if (req.body.username == 'admin') {
       const payload = {
-        username: req.body.username,
+        id: result[0].id,
         permissions: 'userLevel: 2',
       };
       result[0].token = auth.signJwt(payload);
@@ -20,7 +20,7 @@ app.post('/auth/login', (req, res) => {
 
     // if not admin then set a token for normal users:
     const payload = {
-      username: req.body.username,
+      id: result[0].id,
       permissions: 'userLevel: 1',
     };
     result[0].token = auth.signJwt(payload);
