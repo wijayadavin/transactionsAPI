@@ -8,7 +8,7 @@ app.patch('/admin/orders',
       const result = editData(
           'orders',
           req.query.id,
-          body,
+          req.body,
       );
 
       if (!result) {

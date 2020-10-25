@@ -6,7 +6,7 @@ const app = express.Router();
 
 app.post('/admin/orders',
     auth.verifyJwt('userLevel: 2'), (req, res) => {
-      body.id = uid();
+      req.body.id = uid();
       const result = addData('orders', req.body);
 
       if (!result) {

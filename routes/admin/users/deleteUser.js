@@ -5,15 +5,12 @@ const auth = require('../../../middlewares/jwtMiddleware');
 
 app.delete('/admin/users',
     auth.verifyJwt('userLevel: 2'), (req, res) => {
-      if (id) {
-        removeData.removeDataById('users', req.query.id);
-      }
-      if (query) {
-        removeData.removeDataByQuery('users', quereq.queryry);
+      const result = removeData.removeDataByQuery('users', req.query);
+      if (result) {
+        res.send('OK!');
       } else {
-        res.status(400).send('Bad Request');
+        res.status(404).send('Error: not found');
       }
-      res.send('OK!');
     });
 
 module.exports = app;
