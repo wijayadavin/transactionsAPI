@@ -3,7 +3,22 @@ const jwtConfig = require('../jwtConfig');
 
 
 /**
- * create (sign) jwt token
+ * Create (sign) jwt token
+ *
+ * Usage example:
+ *
+ *    const payload = {
+ *    id: result[0].id,
+ *    permissions: 'userLevel: 2',
+ *    };
+ *    const token = signJwt(payload)
+ *
+ * // it means the signJwt function will return a token
+ * // with payload mentioned above
+ * //
+ * // secret from: jwtConfig.secret
+ * // option fron: jwtConfig.options
+ *
  * @param {any} data data payload that want to be encoded as token
  * @return {String} jwt token
  */
@@ -31,13 +46,22 @@ function fromHeaderOrQuerystring(req) {
 
 
 /**
- * verify jwt token
- * @param {String} credentials the credentials required
- * @return {Object} if the permission is okay, \
+ * Verify jwt token
+ *
+ * Usage example in router :
+ *
+ *    app.post('/admin/menus',
+ *    auth.verifyJwt('userLevel: 2'), (req, res) => {}
+ *
+ * // this example means the /admin/menus route
+ * // may only be accessed by user with permission: 'userLevel: 2'
+ * // permission will be declared automatically in login
+ *
+ * @param {String|Array} credentials the credentials required
+ * @return {any} if the permission is okay, \
  * returns decodedPayload into req.user and next()
  */
-verifyJwt = (credentials = []) => {
-  console.log('verifying jwt ... ');
+function verifyJwt(credentials = []) {
   return (req, res, next) => {
     // Convert string credentials into array:
     if (typeof credentials === 'string') {
