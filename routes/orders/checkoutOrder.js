@@ -6,8 +6,8 @@ const getData = require('../../controllers/getController');
 
 app.patch('/orders',
     auth.verifyJwt('userLevel: 1'), (req, res) => {
-      // kurang samakan dengan req.user.id
       foundData = getData('orders', {id: req.query.id});
+
       if (foundData && foundData.id == req.user.id) {
         const result = editData(
             'orders',

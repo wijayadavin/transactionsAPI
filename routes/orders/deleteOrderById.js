@@ -8,6 +8,7 @@ const app = express.Router();
 app.delete('/orders',
     auth.verifyJwt('userLevel: 1'), (req, res) => {
       const foundData = getData('orders', req.query);
+
       if (foundData && foundData[0].userID == req.user.id) {
         const result = removeData.removeDataByQuery(
             'orders',

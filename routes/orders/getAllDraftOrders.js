@@ -6,6 +6,7 @@ const app = express.Router();
 app.get('/orders',
     auth.verifyJwt('userLevel: 1'), (req, res) => {
       const result = getData('orders', {userID: req.user.id});
+
       if (result) {
         res.send(result);
       } else {
