@@ -7,7 +7,10 @@ const auth = require('../../../middlewares/jwtMiddleware');
 
 router.delete('/admin/restaurants',
     auth.verifyJwt('userLevel: 2'), (req, res) => {
-      const result = db.removeDataByQuery('restaurants', req.body);
+      const result = db.removeDataByQuery(
+          'restaurants',
+          req.body
+      );
 
       if (!result) {
         res.status(404).send('Error: Not found');

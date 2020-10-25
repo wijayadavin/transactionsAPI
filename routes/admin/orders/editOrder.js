@@ -1,16 +1,14 @@
-/* eslint-disable new-cap */
 const express = require('express');
-const router = express.Router();
 const editData = require('../../../controllers/editController');
 const auth = require('../../../middlewares/jwtMiddleware');
+const app = express.Router();
 
-
-router.patch('/admin/restaurants',
+app.patch('/admin/orders',
     auth.verifyJwt('userLevel: 2'), (req, res) => {
       const result = editData(
-          'restaurants',
-          req.body.id,
-          req.body,
+          'orders',
+          req.query.id,
+          body,
       );
 
       if (!result) {
@@ -21,5 +19,4 @@ router.patch('/admin/restaurants',
       return;
     });
 
-
-module.exports = router;
+module.exports = app;

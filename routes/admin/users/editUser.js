@@ -1,17 +1,14 @@
-/* eslint-disable new-cap */
 const express = require('express');
-const router = express.Router();
 const editData = require('../../../controllers/editController');
+const app = express.Router();
 const auth = require('../../../middlewares/jwtMiddleware');
 
-
-router.patch('/admin/restaurants',
+app.patch('/admin/users',
     auth.verifyJwt('userLevel: 2'), (req, res) => {
       const result = editData(
-          'restaurants',
-          req.body.id,
-          req.body,
-      );
+          'users',
+          req.query.id,
+          req.body);
 
       if (!result) {
         res.status(400).send('Bad request');
@@ -21,5 +18,4 @@ router.patch('/admin/restaurants',
       return;
     });
 
-
-module.exports = router;
+module.exports = app;
