@@ -7,7 +7,7 @@ const getToday = require('../../helpers/getTodayHelper');
 
 app.post('/orders',
     auth.verifyJwt('userLevel: 1'), (req, res) => {
-      // generate an empty order:
+      // generate a new empty order:
       newOrder = {
         id: uid(),
         userID: req.user.id,
@@ -15,6 +15,7 @@ app.post('/orders',
         status: 0,
         nominal: '0',
       };
+
       // push it to the database:
       const result = addData('orders', newOrder);
 
@@ -22,7 +23,7 @@ app.post('/orders',
         // If failed:
         res.status(500).send('Sorry, something is wrong');
       } else {
-        // If success:
+        // If succeeded:
         res.send(result);
       }
     });

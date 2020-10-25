@@ -4,11 +4,18 @@ const auth = require('../../middlewares/jwtMiddleware');
 const app = express.Router();
 const getData = require('../../controllers/getController');
 
+
 app.patch('/orders',
     auth.verifyJwt('userLevel: 1'), (req, res) => {
-      foundData = getData('orders', {id: req.query.id});
+      // Find order data by id from the requested query:
+      foundOrderData = getData('orders', {id: req.query.id});
 
-      if (foundData && foundData.id == req.user.id) {
+      /**
+       * Condition 1: The order data is available in the Database
+       * Condition 2: The userID in requested order data is the same with
+       *              user's id from the token
+       */
+      if (foundOrderData && foundOrderData[0].userID == req.user.id) {
         const result = editData(
             'orders',
             req.query.id,
@@ -16,17 +23,21 @@ app.patch('/orders',
               id: req.query.id,
               userID: req.user.id,
               status: 1,
-              nominal: foundData.nominal,
-              date: foundData.date,
+              nominal: foundOrderData.nominal,
+              date: foundOrderData.date,
             },
         );
+
         if (!result) {
-          res.status(400).send('Bad request');
+          // if failed:
+          res.sendStatus(400).send('Bad request');
         } else {
+          // if succeeded:
           res.send(result);
         }
       } else {
-        res.send(404).send('Error: Not found');
+        // if Condition 1 && condition 2 == false:
+        res.sendStatus(404).send('Error: Not found');
       }
 
       return;
