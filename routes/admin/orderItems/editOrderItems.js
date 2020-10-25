@@ -1,12 +1,19 @@
 const express = require("express");
 const editData = require("../../../controllers/editController");
+const auth = require("../../../middlewares/jwtMiddleware");
 const app = express.Router();
 
-app.patch("/admin/orderitems", (req, res) => {
+app.patch("/admin/orders/items", auth.verifyJwt("userLevel: 2"), (req, res) => {
   const body = req.body;
   const id = req.query.id;
   const result = editData("orderItems", id, body);
-  res.send(result);
+
+  if (!result) {
+    res.status(400).send("Bad request");
+  } else {
+    res.send(result);
+  }
+  return;
 });
 
 module.exports = app;
