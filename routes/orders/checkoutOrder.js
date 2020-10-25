@@ -11,9 +11,9 @@ app.patch('/orders',
         // Firstly, let's find order data by id from the requested query:
         foundOrderData = getData('orders', {id: req.query.id});
 
-        // Secondly let's see if order's status == 1
+        // Secondly let's see if order's status == 1:
         if (foundOrderData[0].status == 1) {
-          res.send('This order was checked out already').status(304);
+          return res.send('This order was checked out already').status(304);
         }
 
         /**

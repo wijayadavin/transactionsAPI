@@ -11,7 +11,13 @@ app.delete('/orders',
         // Firstly, let's find order data by id from the requested query:
         const foundOrderData = getData('orders', req.query);
 
+        // Secondly, let's see if order's status == 0
+        if (foundOrderData[0].status == 1) {
+          return res.send('Error: Forbidden').status(403);
+        }
+
         /**
+         * Finally let's check the conditions:
          * Condition 1: The order data is available in the Database
          * Condition 2: The userID in requested order data is the same with
          *              user's id from the token
