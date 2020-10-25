@@ -12,7 +12,7 @@ app.post('/auth/login', (req, res) => {
     if (req.body.username == 'admin') {
       const payload = {
         id: result[0].id,
-        permissions: 'userLevel: 2',
+        permissions: ['userLevel: 1', 'userLevel: 2'],
       };
       result[0].token = auth.signJwt(payload);
       return res.send(result);
