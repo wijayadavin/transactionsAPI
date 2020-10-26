@@ -5,16 +5,23 @@ const auth = require('../../../middlewares/jwtMiddleware')
 
 app.get("/order/items",
     auth.verifyJwt('userLevel: 1'), (req, res) => {
-        const query = req.query
-        const id = req.orders.id
-        query.orderID = id
-        const result = getData('orderItems', query)
+        // instead of using orderItems.id we are using the orderID, cause every order items should have the same orderID who already included the restaurantID
+        const id = getData('orders', { id: req.body.orderID })
+        // verify the userID who made an order
+        const isUserAllowed = id[0].userID == req.user.id
+        if (isUserAllowed) {
+            const query = req.query
+            query.orderID = id
+            const result = getData('orderItems', query)
 
-        if (!result) {
-            res.status(404).send('Data not found')
+            if (!result) {
+                res.status(404).send('Data not found')
 
+            } else {
+                res.send(result)
+            }
         } else {
-            res.send(result)
+            res.status(400).send('Bad Request')
         }
     })
 module.exports = app
