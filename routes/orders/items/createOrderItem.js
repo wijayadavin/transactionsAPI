@@ -7,10 +7,10 @@ const app = express.Router();
 const auth = require('../../../middlewares/jwtMiddleware');
 
 
-app.post('/order/items',
+app.post('/orders/items',
     auth.verifyJwt('userLevel: 1'), (req, res) => {
       try {
-      // Get the order data from the requested orderID:
+        // Get the order data from the requested orderID:
         foundOrder = getData('orders', {id: req.body.orderID});
         // Get the menu data from the requested menuID:
         foundMenu = getData('menus', {id: req.body.menuID});

@@ -9,7 +9,7 @@ app.patch('/orders',
     auth.verifyJwt('userLevel: 1'), (req, res) => {
       try {
         // Firstly, let's find order data by id from the requested query:
-        foundOrderData = getData('orders', {id: req.query.id});
+        const foundOrderData = getData('orders', {id: req.query.id});
 
         // Secondly let's see if order's status == 1:
         if (foundOrderData[0].status == 1) {
@@ -24,12 +24,14 @@ app.patch('/orders',
          */
         if (foundOrderData && foundOrderData[0].userID == req.user.id) {
         // Condition 1 & 2 are ok? then let's edit the data:
+          foundOrderData.status = 1;
           const result = editData(
               'orders',
               req.query.id,
               {
                 id: req.query.id,
                 userID: req.user.id,
+                restaurantID: null,
                 status: 1,
                 nominal: foundOrderData.nominal,
                 date: foundOrderData.date,
@@ -44,7 +46,12 @@ app.patch('/orders',
             res.send(result);
           }
         } else {
-        // If condition 1 & 2 are not ok, then send error:
+        // If condition 1 or 2 are not ok, then send error:
+          if (foundOrderData[0].userID != req.user.id) {
+            res.sendStatus(401).send(
+                'Error Unauthorized: User token does not match',
+            );
+          }
           res.sendStatus(404).send('Error: Not found');
         }
       } catch (err) {

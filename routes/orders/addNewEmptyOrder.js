@@ -9,12 +9,13 @@ const getToday = require('../../helpers/getTodayHelper');
 app.post('/orders',
     auth.verifyJwt('userLevel: 1'), (req, res) => {
       // Generate a new empty order:
-      newOrder = {
+      const newOrder = {
         id: uid(),
         userID: req.user.id,
         date: getToday(),
         status: 0,
         nominal: '0',
+        restaurantID: null,
       };
 
       // Push it to the database:

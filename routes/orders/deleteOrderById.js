@@ -38,6 +38,11 @@ app.delete('/orders',
           }
         } else {
         // If condition 1 & 2 are not ok, then send error:
+          if (foundOrderData[0].userID != req.user.id) {
+            res.sendStatus(401).send(
+                'Error Unauthorized: User token does not match',
+            );
+          }
           res.status(404).send('Error: Not found');
         }
       } catch (err) {

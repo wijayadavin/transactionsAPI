@@ -10,9 +10,8 @@ app.get('/admin/orders/items',
       if (result) {
         res.send(result);
       } else {
-        res.status(404).send('not found');
+        es.status(404).send('not found');
       }
-      return;
     });
 
 module.exports = app;
