@@ -10,9 +10,14 @@ app.use(express.json());
  * and use it by app.use(), so you don't need to import / require any route.
  * Reference: https://www.npmjs.com/package/read-dir-deep
  */
+//  read-dir-deep
+//  --> Returns a sorted recursive list of all files inside a directory:
 const readDir = require('read-dir-deep');
+//  import path --> to get a path directory:
 const path = require('path');
+//  routesPath --> get a directory path named routes:
 const routesPath = path.resolve('routes');
+
 const filePaths = readDir.readDirDeepSync(routesPath);
 filePaths.forEach((filePath) => {
   const relativeFilePath = `./${filePath}`;

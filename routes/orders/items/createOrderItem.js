@@ -11,21 +11,20 @@ app.post('/orders/items',
     auth.verifyJwt('userLevel: 1'), (req, res) => {
       try {
         // Get the order data from the requested orderID:
-        foundOrder = getData('orders', {id: req.body.orderID});
+        foundOrder = getData('orders', {id: req.body.orderID})[0];
         // Get the menu data from the requested menuID:
-        foundMenu = getData('menus', {id: req.body.menuID});
+        foundMenu = getData('menus', {id: req.body.menuID})[0];
         // Get the restaurant from the requested menuID:
         foundRestaurant = getData('restaurants', {id: foundMenu.restaurantID});
-        /**
-         * Condition 1: order data must be available in the dataset
-         * Condition 2: The user ID who made the order must be
-         *              match with user's ID from the token
-         * Condition 3: all menu must be from the same restaurant
-         */
+
+        // Condition 1: Order data must be available in the dataset:
         const condition1 = foundOrder && foundOrder.length;
-        const condition2 = foundOrder[0].userID == req.user.id;
+        // Condition 2: The user ID who made the order must be match
+        //              with user's ID from the token"
+        const condition2 = foundOrder.userID == req.user.id;
+        // Condition 3: All menu must be from the same restaurant:
         let condition3 = (
-          foundMenu[0].restaurantID == foundOrder[0].RestaurantID
+          foundMenu.restaurantID == foundOrder.RestaurantID
         );
 
         // If order data has no restaurant:
@@ -43,9 +42,9 @@ app.post('/orders/items',
 
           if (result) {
             res.send({
-              order: foundOrder[0],
+              order: foundOrder,
               orderItem: result,
-              menu: foundMenu[0],
+              menu: foundMenu,
             });
           } else {
             res.status(400).send('Ops! Something Wrong');

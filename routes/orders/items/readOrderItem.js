@@ -17,12 +17,10 @@ app.get('/order/items',
 
 
       const id = getData('orders', {id: req.body.orderID});
-      // verify the userID who made an order
+      // verify the userID who made an order:
       const isUserAllowed = id[0].userID == req.user.id;
       if (isUserAllowed) {
-        const query = req.query;
-        query.orderID = id;
-        const result = getData('orderItems', query);
+        const result = getData('orderItems', req.query);
 
         if (!result) {
           res.status(404).send('Data not found');
