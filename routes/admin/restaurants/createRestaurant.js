@@ -11,6 +11,10 @@ router.post('/admin/restaurants',
       req.body.id = uid();
       const result = addData('restaurants', req.body);
 
+      // Firstly let's check if the restaurant name has exist:
+
+
+      // If ok, continue:
       if (!result) {
         res.status(400).send('Wrong body');
       } else {

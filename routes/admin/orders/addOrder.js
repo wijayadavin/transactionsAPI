@@ -14,6 +14,7 @@ app.post('/admin/orders',
       if (!foundUser[0]) {
         return res.status(404).send('Invalid user ID');
       };
+      // Secondly, let's check if userID is available:
 
       // If ok, continue:
       req.body.id = uid();
