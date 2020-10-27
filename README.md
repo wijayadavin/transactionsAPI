@@ -20,8 +20,12 @@ Read all restaurants in our web (i.e. restaurant name and address)
 
 ## A.2. User-only:
 Login as a user to get access to these sites:
-#### **/profile** - READ & UPDATE user's profile (not other users)  ⚠️ coming soon ⚠️
-#### **/orders/items** - CRUD order items ⚠️ coming soon ⚠️
+#### **/profile** - READ & UPDATE user's profile (not other users) ✔️
+#### **/orders/items** - CRUD order items ✔️
+- CREATE a new order item (the menu in order item must be from one restaurant only)
+- READ an order item by Query
+- UPDATE an order item by ID
+- DELETE an order item by ID
 #### **/orders** - CRUD orders ✔️
 - CREATE a new empty order (not added any orderItem yet)
 - READ user's order list
