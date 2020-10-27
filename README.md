@@ -1,5 +1,6 @@
 # Welcome to our Food Stores API  [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/3b7c54a9707bda788ae0)
-A backend project by Team C of Binar Academy batch 8
+#### A backend project by Team C of Binar Academy batch 8
+
 This RESTful-API (REpresentational State Transfer - Application Programming Interface) project is developed as a practice to implement basic CRUD operations (Create Read Update Delete) that commonly used in many online applications these days. Note that in this project we don't implement a strict data type (no data-schema).
 
 #### About the Food Stores API:
