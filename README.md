@@ -11,6 +11,7 @@ This RESTful-API (REpresentational State Transfer - Application Programming Inte
 - Tech Stack: LowDB - Express.js - Node.js
 - Modularization with MVC design pattern (without View)
 - Automatically run the routes in routes directory folder (app.use)
+- JWT (JSON Web Token) Authorization system with HTTP-Bearer format/strategy
 
 
 # Feature Planning:
@@ -54,4 +55,23 @@ Login as an admin user to get access to special permissions:
 
 
 # B. Database schema:
-<img src="https://i.ibb.co/wL4yJRV/Screenshot-from-2020-10-26-06-53-12.png" alt="Screenshot-from-2020-10-26-06-53-12" border="0">
+
+<img src="https://i.ibb.co/k6DRzmM/Screenshot-from-2020-10-28-00-51-46.png" alt="Screenshot-from-2020-10-28-00-51-46" border="0">
+
+# C. Testing scenarios:
+
+#### C.2. Make restaurants and menus as an admin:
+
+1. Register as an Admin (username 'admin' for the first admin)
+2. Login (received a token for an admin)
+3. Create new restaurants
+4. Create new menus for the restaurants that was created before
+
+#### C.1. Make an order as a normal user (buyer):
+
+1. Register as an User
+2. Login (received a token for a normal user)
+3. Browse for menus
+4. Create a new order (empty basket)
+4. Pick some menus from the same restaurant (added into the basket)
+5. submit the order (Order status changed from draft (status = 0), into checkout (status = 1))
