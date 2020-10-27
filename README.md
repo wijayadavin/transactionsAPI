@@ -60,14 +60,14 @@ Login as an admin user to get access to special permissions:
 
 # C. Testing scenarios:
 
-#### C.2. Make restaurants and menus as an admin:
+#### C.1. Make restaurants and menus as an admin:
 
 1. Register as an Admin (username 'admin' for the first admin)
 2. Login (received a token for an admin)
 3. Create new restaurants
 4. Create new menus for the restaurants that was created before
 
-#### C.1. Make an order as a normal user (buyer):
+#### C.2. Make an order as a normal user (buyer):
 
 1. Register as an User
 2. Login (received a token for a normal user)
