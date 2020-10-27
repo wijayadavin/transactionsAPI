@@ -4,15 +4,26 @@ const getData = require('../../controllers/getController');
 const editData = require('../../controllers/editController');
 const auth = require('../../middlewares/jwtMiddleware');
 
-router.patch('/profile',
+router.patch('/u/:username',
     auth.verifyJwt('userLevel: 1'), (req, res) => {
-      // search if username is existed in database
-      const body = req.body;
-      const isUsernameExist = getData('users', body.username);
-      if (isUsernameExist & isUsernameExist.length > 1) {
-        res.status(400).send('Username is existed');
+      // Check param if found or not
+      const foundUser = getData('users', {id: req.user.id}[0]);
+      if (!foundUser || foundUser.length == 0) {
+        return res.status(400).send('Bad request');
       }
-      // if passed, users can edit their username
+
+      // Check if requested profile to edit is matched with username from token:
+      if (req.params.username != foundUser) {
+        return res.status(401).send('Unauthorized');
+      };
+
+      // Search if username is existed in database:
+      const isUsernameExist = getData('users', {username: req.body.username});
+      if (isUsernameExist & isUsernameExist.length > 1) {
+        return res.status(400).send('Username is existed');
+      }
+
+      // if passed, users can edit their username:
       req.body.id = req.user.id;
       const result = editData('users', req.body.id, req.body);
 
