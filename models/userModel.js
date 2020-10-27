@@ -4,4 +4,5 @@ module.exports = [
   'lastName',
   'username',
   'password',
+  'role',
 ];
