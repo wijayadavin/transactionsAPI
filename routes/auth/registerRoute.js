@@ -8,19 +8,30 @@ const uid = require('uid');
 
 
 app.post('/auth/register', (req, res) => {
-  req.body.id = uid();
-  req.body.level = 1;
-  isUsernameExist = getData('users', {username: req.body.username});
-  if (isUsernameExist && isUsernameExist.length) {
-    res.status(409).send('The same username has exist');
-  }
-  const result = addData('users', req.body);
+  // check if username or password are available:
+  if (req.body.username && req.body.password) {
+  // check if username has exist:
+    isUsernameExist = getData('users', {username: req.body.username})[0];
+    if (isUsernameExist) {
+      res.status(409).send('The same username has exist');
+    }
 
-  if (result) {
-    res.send(result);
-  } else {
+    // if not exist, continue:
+    req.body.id = uid();
+    if (req.body.username == 'admin') {
+      req.body.role = 'admin';
+    } else {
+      req.body.role = 'user';
+    }
+    const result = addData('users', req.body);
+    if (result) {
+      res.send(result);
+    } else {
     // called if request body object key is lacking:
-    res.status(400).send('Bad request');
+      res.status(400).send('Bad request');
+    }
+  } else {
+    res.status(400).send('Please insert username and password');
   }
 },
 );

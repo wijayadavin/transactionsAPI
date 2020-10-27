@@ -86,7 +86,7 @@ function verifyJwt(credentials = []) {
           if (credentials.length > 0) {
             // If credentials is not null, continue to check the permision:
             if (
-            // 1. The permission must be not falsy:
+            // 1. The permission must be not a falsy:
               decodedPayload.permissions &&
             // 2. The permission must be not empty:
             decodedPayload.permissions.length &&
