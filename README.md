@@ -1,5 +1,17 @@
 # Welcome to our Food Stores API  [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/3b7c54a9707bda788ae0)
-by Team C of Binar Academy batch 8
+A backend project by Team C of Binar Academy batch 8
+This RESTful-API (REpresentational State Transfer - Application Programming Interface) project is developed as a practice to implement basic CRUD operations (Create Read Update Delete) that commonly used in many online applications these days. Note that in this project we don't implement a strict data type (no data-schema).
+
+#### About the Food Stores API:
+- A simple API that let registered users to buy food by online
+- Because this is not a fully-scaled development, the restaurants and menus are added manually by Admin
+
+#### Specifications:
+
+- Tech Stack: LowDB - Express.js - Node.js
+- Modularization with MVC design pattern (without View)
+- Automatically run the routes in routes directory folder (app.use)
+
 
 # Feature Planning:
 # A. Features
