@@ -9,7 +9,7 @@ router.patch('/profile',
       // search if username is existed in database
       const body = req.body;
       const isUsernameExist = getData('users', body.username);
-      if (isUsernameExist & isUsernameExist.length) {
+      if (isUsernameExist & isUsernameExist.length > 1) {
         res.status(400).send('Username is existed');
       }
       // if passed, users can edit their username
