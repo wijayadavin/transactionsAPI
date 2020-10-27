@@ -7,7 +7,7 @@ const uid = require('uid');
 
 
 router.post('/admin/restaurants',
-    auth.verifyJwt('userLevel: 2'), (req, res) => {
+    auth.verifyJwt('role: admin'), (req, res) => {
       req.body.id = uid();
       const result = addData('restaurants', req.body);
 

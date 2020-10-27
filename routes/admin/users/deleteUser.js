@@ -4,7 +4,7 @@ const app = express.Router();
 const auth = require('../../../middlewares/jwtMiddleware');
 
 app.delete('/admin/users',
-    auth.verifyJwt('userLevel: 2'), (req, res) => {
+    auth.verifyJwt('role: admin'), (req, res) => {
       const result = removeData.removeDataByQuery('users', req.query);
       if (result) {
         res.send('OK!');

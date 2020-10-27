@@ -8,7 +8,7 @@ const uid = require('uid');
 
 
 router.post('/admin/menus',
-    auth.verifyJwt('userLevel: 2'), (req, res) => {
+    auth.verifyJwt('role: admin'), (req, res) => {
       // Firstly, let's check if restaurantID is available:
       const foundRestaurant = getData(
           'restaurants',

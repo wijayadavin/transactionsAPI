@@ -6,7 +6,7 @@ const auth = require('../../../middlewares/jwtMiddleware');
 const app = express.Router();
 
 app.post('/admin/orders',
-    auth.verifyJwt('userLevel: 2'), (req, res) => {
+    auth.verifyJwt('role: admin'), (req, res) => {
       // Firstly, let's check if userID is available:
       const foundUser = getData(
           'users',

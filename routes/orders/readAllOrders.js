@@ -5,7 +5,7 @@ const app = express.Router();
 
 
 app.get('/orders',
-    auth.verifyJwt('userLevel: 1'), (req, res) => {
+    auth.verifyJwt('role: user'), (req, res) => {
       // read all order with userID == user's ID from the token
       const result = getData('orders', {userID: req.user.id});
 

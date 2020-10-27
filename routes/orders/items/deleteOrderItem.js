@@ -5,7 +5,7 @@ const auth = require('../../../middlewares/jwtMiddleware');
 const removeData = require('../../../controllers/removeController')
 
 app.get('/order/items',
-    auth.verifyJwt('userLevel: 1'), (req, res) => {
+    auth.verifyJwt('role: user'), (req, res) => {
       /**
          * instead of using orderItems.id we are using the orderID,
          * cause every order items should have the same

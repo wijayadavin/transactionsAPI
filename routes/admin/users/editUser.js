@@ -4,7 +4,7 @@ const app = express.Router();
 const auth = require('../../../middlewares/jwtMiddleware');
 
 app.patch('/admin/users',
-    auth.verifyJwt('userLevel: 2'), (req, res) => {
+    auth.verifyJwt('role: admin'), (req, res) => {
       const result = editData(
           'users',
           req.query.id,

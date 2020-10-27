@@ -7,7 +7,7 @@ const getToday = require('../../helpers/getTodayHelper');
 
 
 app.post('/orders',
-    auth.verifyJwt('userLevel: 1'), (req, res) => {
+    auth.verifyJwt('role: user'), (req, res) => {
       // Generate a new empty order:
       const newOrder = {
         id: uid(),

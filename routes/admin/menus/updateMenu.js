@@ -6,7 +6,7 @@ const auth = require('../../../middlewares/jwtMiddleware');
 
 
 router.patch('/admin/menus',
-    auth.verifyJwt('userLevel: 2'), (req, res) => {
+    auth.verifyJwt('role: admin'), (req, res) => {
       const result = editData('menus',
           req.body.id,
           req.body,

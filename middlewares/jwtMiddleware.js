@@ -9,7 +9,7 @@ const jwtConfig = require('../jwtConfig');
  *
  *    const payload = {
  *    id: result[0].id,
- *    permissions: 'userLevel: 2',
+ *    permissions: 'role: admin',
  *    };
  *    const token = signJwt(payload)
  *
@@ -51,10 +51,10 @@ function fromHeaderOrQuerystring(req) {
  * Usage example in router :
  *
  *    app.post('/admin/menus',
- *    auth.verifyJwt('userLevel: 2'), (req, res) => {}
+ *    auth.verifyJwt('role: admin'), (req, res) => {}
  *
  * this example means the /admin/menus route
- * may only be accessed by user with permission: 'userLevel: 2'
+ * may only be accessed by user with permission: 'role: admin'
  * permission will be declared automatically in login
  *
  * @param {String|Array} credentials the credentials required

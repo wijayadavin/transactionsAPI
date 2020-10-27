@@ -8,7 +8,7 @@ const auth = require('../../../middlewares/jwtMiddleware');
 
 
 app.post('/orders/items',
-    auth.verifyJwt('userLevel: 1'), (req, res) => {
+    auth.verifyJwt('role: user'), (req, res) => {
       // Get the order data from the requested orderID:
       foundOrder = getData('orders', {id: req.body.orderID})[0];
       if (!foundOrder) {

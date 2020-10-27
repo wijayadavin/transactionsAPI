@@ -8,7 +8,7 @@ const auth = require('../../../middlewares/jwtMiddleware');
 
 
 app.post('/admin/users',
-    auth.verifyJwt('userLevel: 2'), (req, res) => {
+    auth.verifyJwt('role: admin'), (req, res) => {
       // Firstly, let's check if username has exist:
       isUsernameExist = getData('users', {username: req.body.username});
       if (isUsernameExist && isUsernameExist.length) {

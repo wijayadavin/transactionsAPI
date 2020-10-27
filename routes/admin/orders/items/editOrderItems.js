@@ -3,7 +3,7 @@ const editData = require('../../../../controllers/editController');
 const auth = require('../../../../middlewares/jwtMiddleware');
 const app = express.Router();
 
-app.patch('/admin/orders/items', auth.verifyJwt('userLevel: 2'), (req, res) => {
+app.patch('/admin/orders/items', auth.verifyJwt('role: admin'), (req, res) => {
   const result = editData(
       'orderItems',
       req.query.id,

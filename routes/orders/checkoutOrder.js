@@ -6,7 +6,7 @@ const getData = require('../../controllers/getController');
 
 
 app.patch('/orders',
-    auth.verifyJwt('userLevel: 1'), (req, res) => {
+    auth.verifyJwt('role: user'), (req, res) => {
       try {
         // Firstly, let's find order data by id from the requested query:
         const foundOrderData = getData('orders', {id: req.query.id});
