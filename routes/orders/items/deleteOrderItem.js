@@ -2,7 +2,8 @@ const express = require('express');
 const getData = require('../../../controllers/getController');
 const app = express.Router();
 const auth = require('../../../middlewares/jwtMiddleware');
-const removeData = require('../../../controllers/removeController')
+const removeData = require('../../../controllers/removeController');
+const editData = require('../../../controllers/editController');
 
 app.get('/order/items',
     auth.verifyJwt('role: user'), (req, res) => {
@@ -13,15 +14,21 @@ app.get('/order/items',
          */
 
       // Firstly, let's find the order data:
-      const foundOrder = getData('orders', {id: req.query.id});
-      if (!foundOrder || !foundOrder.length) {
+      const foundOrderItem = getData('orderItems', {id: req.query.id})[0];
+      if (!foundOrderItem) {
+        return res.status(404).send('Error: order Item not found');
+      }
+      // Secondly, let's find the order data:
+      const foundOrder = getData('orders', {id: foundOrderItem.orderID})[0];
+      if (!foundOrder) {
         return res.status(404).send('Error: order not found');
       }
-      // secondly, let's find the user data:
-      const foundUser = getData('users', {id: req.body.userID})[0];
+      // Thirdly, let's find the user data:
+      const foundUser = getData('users', {id: foundOrder.userID})[0];
       if (!foundUser) {
         return res.status(404).send('Error: userID not found');
       }
+
       // Finally,
       // verify if userID from menuID is matched with userID from token:
       const isUserAllowed = foundUser.userID == req.user.id;
@@ -29,12 +36,24 @@ app.get('/order/items',
         // If all is ok, then continue:
         const result = removeData.removeDataById('orderItems', req.query.id);
         if (!result) {
-          res.status(404).send('Data not found');
+          return res.status(404).send('Data not found');
         } else {
-          res.send(result);
+          // if order item is empty after the deletion, delete the restaurantID:
+          const foundOrderItemByOrderID = (
+            getData('orderItems', {orderID: foundOrder.id})[0]
+          );
+          if (!foundOrderItemByOrderID) {
+            foundOrder.restaurantID = null;
+            const removedResult = editData('orders', foundOrder.id, foundOrder);
+            if (removedResult) {
+              return res.send(removedResult);
+            } else {
+              return res.status(500).send('oops, something is wrong here');
+            }
+          }
         }
       } else {
-        res.status(401).send('Not authorized');
+        return res.status(401).send('Not authorized');
       }
     });
 module.exports = app;
