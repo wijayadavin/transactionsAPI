@@ -38,4 +38,4 @@ Login as an admin user to get access to special permissions:
 
 
 # B. Database schema:
-<img src="https://i.ibb.co/v4YKp4j/Screenshot-from-2020-10-26-06-41-57.png" alt="Screenshot-from-2020-10-26-06-41-57" border="0">
+<img src="https://i.ibb.co/wL4yJRV/Screenshot-from-2020-10-26-06-53-12.png" alt="Screenshot-from-2020-10-26-06-53-12" border="0">
