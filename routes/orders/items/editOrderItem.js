@@ -1,9 +1,10 @@
 const express = require('express');
+const editData = require('../../../controllers/editController');
 const getData = require('../../../controllers/getController');
 const app = express.Router();
 const auth = require('../../../middlewares/jwtMiddleware');
 
-app.get('/orders/items',
+app.get('/order/items',
     auth.verifyJwt('userLevel: 1'), (req, res) => {
       /**
          * instead of using orderItems.id we are using the orderID,
@@ -12,7 +13,7 @@ app.get('/orders/items',
          */
 
       // Firstly, let's find the order data:
-      const foundOrder = getData('orders', req.query.orderID)[0];
+      const foundOrder = getData('orders', req.body.id)[0];
       if (!foundOrder) {
         return res.status(404).send('Error: order not found');
       }
@@ -26,7 +27,7 @@ app.get('/orders/items',
       const isUserAllowed = foundUser.id == req.user.id;
       if (isUserAllowed) {
         // If all is ok, then continue:
-        const result = getData('orderItems', req.query);
+        const result = editData('orderItems', req.query);
         if (!result) {
           return res.status(404).send('Data not found');
         } else {

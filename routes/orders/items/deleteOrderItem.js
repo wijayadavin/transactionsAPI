@@ -2,8 +2,9 @@ const express = require('express');
 const getData = require('../../../controllers/getController');
 const app = express.Router();
 const auth = require('../../../middlewares/jwtMiddleware');
+const removeData = require('../../../controllers/removeController')
 
-app.get('/orders/items',
+app.get('/order/items',
     auth.verifyJwt('userLevel: 1'), (req, res) => {
       /**
          * instead of using orderItems.id we are using the orderID,
@@ -12,28 +13,28 @@ app.get('/orders/items',
          */
 
       // Firstly, let's find the order data:
-      const foundOrder = getData('orders', req.query.orderID)[0];
-      if (!foundOrder) {
+      const foundOrder = getData('orders', {id: req.query.id});
+      if (!foundOrder || !foundOrder.length) {
         return res.status(404).send('Error: order not found');
       }
-      // Secondly, let's find the user data:
-      const foundUser = getData('users', {id: foundOrder.userID})[0];
+      // secondly, let's find the user data:
+      const foundUser = getData('users', {id: req.body.userID})[0];
       if (!foundUser) {
         return res.status(404).send('Error: userID not found');
       }
-      // Finally
+      // Finally,
       // verify if userID from menuID is matched with userID from token:
-      const isUserAllowed = foundUser.id == req.user.id;
+      const isUserAllowed = foundUser.userID == req.user.id;
       if (isUserAllowed) {
         // If all is ok, then continue:
-        const result = getData('orderItems', req.query);
+        const result = removeData.removeDataById('orderItems', req.query.id);
         if (!result) {
-          return res.status(404).send('Data not found');
+          res.status(404).send('Data not found');
         } else {
-          return res.send(result);
+          res.send(result);
         }
       } else {
-        return res.status(401).send('Not authorized');
+        res.status(401).send('Not authorized');
       }
     });
 module.exports = app;
