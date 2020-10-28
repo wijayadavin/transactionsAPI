@@ -1,8 +1,8 @@
 const express = require('express');
-const editData = require('../../../controllers/editController');
-const getData = require('../../../controllers/getController');
+const editData = require('../../../../controllers/editController');
+const getData = require('../../../../controllers/getController');
 const router = express.Router();
-const auth = require('../../../middlewares/jwtMiddleware');
+const auth = require('../../../../middlewares/jwtMiddleware');
 
 router.get('/order/items',
     auth.passport.authenticate('bearer', {session: false}), (req, res) => {

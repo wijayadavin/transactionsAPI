@@ -1,6 +1,6 @@
 const express = require('express');
-const getData = require('../../controllers/getController');
-const auth = require('../../middlewares/jwtMiddleware');
+const getData = require('../../../controllers/getController');
+const auth = require('../../../middlewares/jwtMiddleware');
 const router = express.Router();
 
 

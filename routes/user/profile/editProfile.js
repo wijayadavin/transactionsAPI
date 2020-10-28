@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const getData = require('../../controllers/getController');
-const editData = require('../../controllers/editController');
-const auth = require('../../middlewares/jwtMiddleware');
+const getData = require('../../../controllers/getController');
+const editData = require('../../../controllers/editController');
+const auth = require('../../../middlewares/jwtMiddleware');
 
 router.patch('/u/:username',
     auth.passport.authenticate('bearer', {session: false}), (req, res) => {

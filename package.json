@@ -17,6 +17,7 @@
     "lowdb": "^1.0.0",
     "passport": "^0.4.1",
     "passport-http-bearer": "^1.0.1",
+    "permission": "^1.1.0",
     "read-dir-deep": "^7.0.1",
     "uid": "^1.0.0"
   },

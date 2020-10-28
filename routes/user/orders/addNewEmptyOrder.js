@@ -1,9 +1,9 @@
 const express = require('express');
-const addData = require('../../controllers/addController');
+const addData = require('../../../controllers/addController');
 const uid = require('uid');
-const auth = require('../../middlewares/jwtMiddleware');
+const auth = require('../../../middlewares/jwtMiddleware');
 const router = express.Router();
-const getToday = require('../../helpers/getTodayHelper');
+const getToday = require('../../../helpers/getTodayHelper');
 
 
 router.post('/orders',

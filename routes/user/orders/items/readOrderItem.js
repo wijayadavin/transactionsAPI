@@ -1,7 +1,7 @@
 const express = require('express');
-const getData = require('../../../controllers/getController');
+const getData = require('../../../../controllers/getController');
 const router = express.Router();
-const auth = require('../../../middlewares/jwtMiddleware');
+const auth = require('../../../../middlewares/jwtMiddleware');
 
 router.get('/orders/items',
     auth.passport.authenticate('bearer', {session: false}), (req, res) => {

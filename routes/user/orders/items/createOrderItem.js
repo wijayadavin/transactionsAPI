@@ -1,10 +1,10 @@
 const express = require('express');
-const getData = require('../../../controllers/getController');
-const addData = require('../../../controllers/addController');
-const editData = require('../../../controllers/editController');
+const getData = require('../../../../controllers/getController');
+const addData = require('../../../../controllers/addController');
+const editData = require('../../../../controllers/editController');
 const uid = require('uid');
 const router = express.Router();
-const auth = require('../../../middlewares/jwtMiddleware');
+const auth = require('../../../../middlewares/jwtMiddleware');
 
 
 router.post('/orders/items',

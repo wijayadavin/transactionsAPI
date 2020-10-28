@@ -1,8 +1,8 @@
 const express = require('express');
-const editData = require('../../controllers/editController');
-const auth = require('../../middlewares/jwtMiddleware');
+const editData = require('../../../controllers/editController');
+const auth = require('../../../middlewares/jwtMiddleware');
 const router = express.Router();
-const getData = require('../../controllers/getController');
+const getData = require('../../../controllers/getController');
 
 
 router.patch('/orders',

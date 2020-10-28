@@ -17,12 +17,14 @@ const readDir = require('read-dir-deep');
 //  import path --> to get a path directory:
 const path = require('path');
 //  routesPath --> get a directory path named routes:
-const routesPath = path.resolve('routes');
+const publicRoutesPath = path.resolve('routes/public/');
+const userRoutesPath = path.resolve('routes/user/');
+const adminRoutesPath = path.resolve('routes/admin/');
 
-const filePaths = readDir.readDirDeepSync(routesPath);
+const filePaths = readDir.readDirDeepSync(publicRoutesPath);
 filePaths.forEach((filePath) => {
   const relativeFilePath = `./${filePath}`;
-  console.log(`${relativeFilePath} loaded!`);
+  console.log(`${filePath} loaded!`);
   const route = require(relativeFilePath);
   app.use(route);
 });

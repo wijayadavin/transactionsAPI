@@ -1,5 +1,5 @@
 const express = require('express');
-const getData = require('../../controllers/getController');
+const getData = require('../../../controllers/getController');
 const router = express.Router();
 
 router.get('/u/:username', (req, res) => {
