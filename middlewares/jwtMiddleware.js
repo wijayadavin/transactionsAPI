@@ -13,11 +13,11 @@ const jwtConfig = require('../jwtConfig');
  *    };
  *    const token = signJwt(payload)
  *
- * // it means the signJwt function will return a token
- * // with payload mentioned above
- * //
- * // secret from: jwtConfig.secret
- * // option fron: jwtConfig.options
+ * it means the signJwt function will return a token
+ * with payload mentioned above
+ *
+ * secret from: jwtConfig.secret
+ * option fron: jwtConfig.options
  *
  * @param {any} data data payload that want to be encoded as token
  * @return {String} jwt token
