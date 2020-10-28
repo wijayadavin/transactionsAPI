@@ -2,7 +2,6 @@ const express = require('express');
 const addData = require('../../../controllers/addController');
 const getData = require('../../../controllers/getController');
 const uid = require('uid');
-const auth = require('../../../middlewares/jwtMiddleware');
 const userPermission = require('../../../controllers/userController');
 const router = express.Router();
 

@@ -1,7 +1,6 @@
 const express = require('express');
 const userPermission = require('../../../../controllers/userController');
 const removeData = require('../../../../controllers/removeController');
-const auth = require('../../../../middlewares/jwtMiddleware');
 const router = express.Router();
 
 router.delete('/admin/orders/items'),

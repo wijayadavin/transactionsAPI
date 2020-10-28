@@ -3,7 +3,6 @@ const express = require('express');
 const userPermission = require('../../../controllers/userController');
 const router = express.Router();
 const db = require('../../../controllers/removeController');
-const auth = require('../../../middlewares/jwtMiddleware');
 
 
 router.delete('/admin/restaurants', userPermission(['admin']), (req, res) => {

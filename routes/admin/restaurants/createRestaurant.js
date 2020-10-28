@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const addData = require('../../../controllers/addController');
-const auth = require('../../../middlewares/jwtMiddleware');
 const uid = require('uid');
 const userPermission = require('../../../controllers/userController');
 

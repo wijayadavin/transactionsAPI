@@ -1,6 +1,5 @@
 const express = require('express');
 const removeData = require('../../../controllers/removeController');
-const auth = require('../../../middlewares/jwtMiddleware');
 const router = express.Router();
 const userPermission = require('../../../controllers/userController');
 
