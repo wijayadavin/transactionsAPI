@@ -43,8 +43,8 @@ userRoutesFilePaths.forEach((filePath) => {
   const relativeFilePath = `./${filePath}`;
   console.log(`${filePath} loaded for user!`);
   const route = require(relativeFilePath);
-  app.use(route, auth.passport.authenticate('bearer', {session: false})
-      , permissionHelper(['user', 'admin']));
+  app.use(route, auth.passport.authenticate('bearer', {session: false}),
+  );
 });
 
 // Load admin routes:
