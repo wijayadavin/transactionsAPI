@@ -3,7 +3,6 @@ const express = require('express');
 const router = express.Router();
 const getData = require('../../../controllers/getController');
 const userPermission = require('../../../controllers/userController');
-const auth = require('../../../middlewares/jwtMiddleware');
 
 
 router.get('/admin/restaurants', userPermission(['admin']), (req, res) => {
