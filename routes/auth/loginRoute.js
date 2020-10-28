@@ -2,10 +2,10 @@ const express = require('express');
 const { restart } = require('nodemon');
 const getData = require('../../controllers/getController');
 const auth = require('../../middlewares/jwtMiddleware');
-const app = express.Router();
+const router = express.Router();
 
 
-app.post('/auth/login', (req, res) => {
+router.post('/auth/login', (req, res) => {
   if (req.body.username && req.body.password) {
     const result = getData('users', req.body)[0];
 
@@ -36,4 +36,4 @@ app.post('/auth/login', (req, res) => {
 });
 
 
-module.exports = app;
+module.exports = router;

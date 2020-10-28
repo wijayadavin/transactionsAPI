@@ -1,8 +1,8 @@
 const express = require('express');
 const getData = require('../../controllers/getController');
-const app = express.Router();
+const router = express.Router();
 
-app.get('/u/:username', (req, res) => {
+router.get('/u/:username', (req, res) => {
   const result = getData('users', {username: req.params.username})[0];
   // get username by username as path, return result if found:
   if (result) {
@@ -13,4 +13,4 @@ app.get('/u/:username', (req, res) => {
   }
 });
 
-module.exports = app;
+module.exports = router;

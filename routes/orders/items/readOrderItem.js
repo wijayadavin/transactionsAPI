@@ -1,9 +1,9 @@
 const express = require('express');
 const getData = require('../../../controllers/getController');
-const app = express.Router();
+const router = express.Router();
 const auth = require('../../../middlewares/jwtMiddleware');
 
-app.get('/orders/items',
+router.get('/orders/items',
     auth.verifyJwt('role: user'), (req, res) => {
       /**
          * instead of using orderItems.id we are using the orderID,
@@ -36,4 +36,4 @@ app.get('/orders/items',
         return res.status(401).send('Not authorized');
       }
     });
-module.exports = app;
+module.exports = router;

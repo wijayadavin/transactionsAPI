@@ -1,8 +1,8 @@
 const express = require('express');
 const getData = require('../../controllers/getController');
-const app = express.Router();
+const router = express.Router();
 
-app.get('/menus', (req, res) => {
+router.get('/menus', (req, res) => {
   const query = req.query;
   const result = getData('menus', query);
   if (!result) {
@@ -11,4 +11,4 @@ app.get('/menus', (req, res) => {
   res.send(result);
 });
 
-module.exports = app;
+module.exports = router;

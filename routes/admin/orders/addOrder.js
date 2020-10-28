@@ -3,9 +3,9 @@ const addData = require('../../../controllers/addController');
 const getData = require('../../../controllers/getController');
 const uid = require('uid');
 const auth = require('../../../middlewares/jwtMiddleware');
-const app = express.Router();
+const router = express.Router();
 
-app.post('/admin/orders',
+router.post('/admin/orders',
     auth.verifyJwt('role: admin'), (req, res) => {
       // Firstly, let's check if userID is available:
       const foundUser = getData(
@@ -28,4 +28,4 @@ app.post('/admin/orders',
       return;
     });
 
-module.exports = app;
+module.exports = router;

@@ -1,9 +1,9 @@
 const express = require('express');
 const getData = require('../../../controllers/getController');
 const auth = require('../../../middlewares/jwtMiddleware');
-const app = express.Router();
+const router = express.Router();
 
-app.get('/admin/orders',
+router.get('/admin/orders',
     auth.verifyJwt('role: admin'), (req, res) => {
       const result = getData('orders', req.query);
 
@@ -15,4 +15,4 @@ app.get('/admin/orders',
       return;
     });
 
-module.exports = app;
+module.exports = router;

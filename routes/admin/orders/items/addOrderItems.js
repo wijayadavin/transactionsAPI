@@ -3,9 +3,9 @@ const addData = require('../../../../controllers/addController');
 const getData = require('../../../../controllers/getController');
 const uid = require('uid');
 const auth = require('../../../../middlewares/jwtMiddleware');
-const app = express.Router();
+const router = express.Router();
 
-app.post('/admin/orders/items',
+router.post('/admin/orders/items',
     auth.verifyJwt('role: admin'), (req, res) => {
       // Firstly, let's check if order ID is available:
       const foundOrder = getData(
@@ -40,4 +40,4 @@ app.post('/admin/orders/items',
       return;
     });
 
-module.exports = app;
+module.exports = router;

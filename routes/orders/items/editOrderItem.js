@@ -1,10 +1,10 @@
 const express = require('express');
 const editData = require('../../../controllers/editController');
 const getData = require('../../../controllers/getController');
-const app = express.Router();
+const router = express.Router();
 const auth = require('../../../middlewares/jwtMiddleware');
 
-app.get('/order/items',
+router.get('/order/items',
     auth.verifyJwt('role: user'), (req, res) => {
       /**
          * instead of using orderItems.id we are using the orderID,
@@ -37,4 +37,4 @@ app.get('/order/items',
         return res.status(401).send('Not authorized');
       }
     });
-module.exports = app;
+module.exports = router;

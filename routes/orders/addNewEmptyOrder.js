@@ -2,11 +2,11 @@ const express = require('express');
 const addData = require('../../controllers/addController');
 const uid = require('uid');
 const auth = require('../../middlewares/jwtMiddleware');
-const app = express.Router();
+const router = express.Router();
 const getToday = require('../../helpers/getTodayHelper');
 
 
-app.post('/orders',
+router.post('/orders',
     auth.verifyJwt('role: user'), (req, res) => {
       // Generate a new empty order:
       const newOrder = {
@@ -31,4 +31,4 @@ app.post('/orders',
     });
 
 
-module.exports = app;
+module.exports = router;

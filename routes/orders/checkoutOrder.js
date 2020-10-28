@@ -1,11 +1,11 @@
 const express = require('express');
 const editData = require('../../controllers/editController');
 const auth = require('../../middlewares/jwtMiddleware');
-const app = express.Router();
+const router = express.Router();
 const getData = require('../../controllers/getController');
 
 
-app.patch('/orders',
+router.patch('/orders',
     auth.verifyJwt('role: user'), (req, res) => {
       try {
         // Firstly, let's find order data by id from the requested query:
@@ -66,4 +66,4 @@ app.patch('/orders',
     });
 
 
-module.exports = app;
+module.exports = router;

@@ -1,10 +1,10 @@
 const express = require('express');
 const getData = require('../../controllers/getController');
 const auth = require('../../middlewares/jwtMiddleware');
-const app = express.Router();
+const router = express.Router();
 
 
-app.get('/orders',
+router.get('/orders',
     auth.verifyJwt('role: user'), (req, res) => {
       // read all order with userID == user's ID from the token
       const result = getData('orders', {userID: req.user.id});
@@ -20,4 +20,4 @@ app.get('/orders',
     });
 
 
-module.exports = app;
+module.exports = router;

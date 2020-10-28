@@ -3,11 +3,11 @@ const getData = require('../../../controllers/getController');
 const addData = require('../../../controllers/addController');
 const editData = require('../../../controllers/editController');
 const uid = require('uid');
-const app = express.Router();
+const router = express.Router();
 const auth = require('../../../middlewares/jwtMiddleware');
 
 
-app.post('/orders/items',
+router.post('/orders/items',
     auth.verifyJwt('role: user'), (req, res) => {
       // Get the order data from the requested orderID:
       foundOrder = getData('orders', {id: req.body.orderID})[0];
@@ -62,4 +62,4 @@ app.post('/orders/items',
       }
     });
 
-module.exports = app;
+module.exports = router;

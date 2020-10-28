@@ -3,11 +3,11 @@ const express = require('express');
 const addData = require('../../../controllers/addController');
 const getData = require('../../../controllers/getController');
 const uid = require('uid');
-const app = express.Router();
+const router = express.Router();
 const auth = require('../../../middlewares/jwtMiddleware');
 
 
-app.post('/admin/users',
+router.post('/admin/users',
     auth.verifyJwt('role: admin'), (req, res) => {
       // Firstly, let's check if username has exist:
       isUsernameExist = getData('users', {username: req.body.username});
@@ -25,4 +25,4 @@ app.post('/admin/users',
       }
     });
 
-module.exports = app;
+module.exports = router;

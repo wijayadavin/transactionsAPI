@@ -1,13 +1,13 @@
 const express = require('express');
 const addData = require('../../controllers/addController');
 const getData = require('../../controllers/getController');
-const app = express.Router();
+const router = express.Router();
 // uid is a id generator library
 // Reference: https://www.npmjs.com/package/uid
 const uid = require('uid');
 
 
-app.post('/auth/register', (req, res) => {
+router.post('/auth/register', (req, res) => {
   // check if username or password are available:
   if (req.body.username && req.body.password) {
   // check if username has exist:
@@ -37,4 +37,4 @@ app.post('/auth/register', (req, res) => {
 );
 
 
-module.exports = app;
+module.exports = router;

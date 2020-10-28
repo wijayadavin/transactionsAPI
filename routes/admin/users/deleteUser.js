@@ -1,9 +1,9 @@
 const express = require('express');
 const removeData = require('../../../controllers/removeController');
-const app = express.Router();
+const router = express.Router();
 const auth = require('../../../middlewares/jwtMiddleware');
 
-app.delete('/admin/users',
+router.delete('/admin/users',
     auth.verifyJwt('role: admin'), (req, res) => {
       const result = removeData.removeDataByQuery('users', req.query);
       if (result) {
@@ -13,4 +13,4 @@ app.delete('/admin/users',
       }
     });
 
-module.exports = app;
+module.exports = router;

@@ -2,10 +2,10 @@ const express = require('express');
 const getData = require('../../controllers/getController');
 const removeData = require('../../controllers/removeController');
 const auth = require('../../middlewares/jwtMiddleware');
-const app = express.Router();
+const router = express.Router();
 
 
-app.delete('/orders',
+router.delete('/orders',
     auth.verifyJwt('role: user'), (req, res) => {
       try {
         // Firstly, let's find order data by id from the requested query:
@@ -56,4 +56,4 @@ app.delete('/orders',
     });
 
 
-module.exports = app;
+module.exports = router;

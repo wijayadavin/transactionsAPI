@@ -1,9 +1,9 @@
 const express = require('express');
 const editData = require('../../../controllers/editController');
 const auth = require('../../../middlewares/jwtMiddleware');
-const app = express.Router();
+const router = express.Router();
 
-app.patch('/admin/orders',
+router.patch('/admin/orders',
     auth.verifyJwt('role: admin'), (req, res) => {
       const result = editData(
           'orders',
@@ -19,4 +19,4 @@ app.patch('/admin/orders',
       return;
     });
 
-module.exports = app;
+module.exports = router;
