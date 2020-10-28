@@ -5,28 +5,29 @@ const addData = require('../../../controllers/addController');
 const getData = require('../../../controllers/getController');
 const auth = require('../../../middlewares/jwtMiddleware');
 const uid = require('uid');
+permissionHelper = require('../../../helpers/permissionHelper');
 
 
-router.post('/admin/menus'), (req, res) => {
-      // Firstly, let's check if restaurantID is available:
-      const foundRestaurant = getData(
-          'restaurants',
-          {id: req.body.restaurantID});
-      if (!foundRestaurant[0]) {
-        return res.status(404).send('Invalid restaurant ID');
-      };
+router.post('/admin/menus', permissionHelper(['admin']), (req, res) => {
+  // Firstly, let's check if restaurantID is available:
+  const foundRestaurant = getData(
+      'restaurants',
+      {id: req.body.restaurantID});
+  if (!foundRestaurant[0]) {
+    return res.status(404).send('Invalid restaurant ID');
+  };
 
-      // If ok, continue:
-      req.body.id = uid();
-      const result = addData('menus', req.body);
+  // If ok, continue:
+  req.body.id = uid();
+  const result = addData('menus', req.body);
 
-      if (!result) {
-        res.status(400).send('Wrong body');
-      } else {
-        res.send(result);
-      }
-      return;
-    };
+  if (!result) {
+    res.status(400).send('Wrong body');
+  } else {
+    res.send(result);
+  }
+  return;
+});
 
 
 module.exports = router;

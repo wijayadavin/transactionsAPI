@@ -13,7 +13,7 @@ router.post('/auth/register', (req, res) => {
   // check if username has exist:
     isUsernameExist = getData('users', {username: req.body.username})[0];
     if (isUsernameExist) {
-      res.status(409).send('The same username has exist');
+      return res.status(409).send('The same username has exist');
     }
 
     // if not exist, continue:
@@ -25,13 +25,13 @@ router.post('/auth/register', (req, res) => {
     }
     const result = addData('users', req.body);
     if (result) {
-      res.send(result);
+      return res.send(result);
     } else {
     // called if request body object key is lacking:
-      res.status(400).send('Bad request');
+      return res.status(400).send('Bad request');
     }
   } else {
-    res.status(400).send('Please insert username and password');
+    return res.status(400).send('Please insert username and password');
   }
 },
 );

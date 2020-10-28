@@ -1,8 +1,10 @@
 const express = require('express');
 const getData = require('../../../controllers/getController');
 const router = express.Router();
+const permissionHelper = require('../../../helpers/permissionHelper');
 
-router.get('/u/:username', (req, res) => {
+
+router.get('/u/:username', permissionHelper(['user', 'admin']), (req, res) => {
   const result = getData('users', {username: req.params.username})[0];
   // get username by username as path, return result if found:
   if (result) {

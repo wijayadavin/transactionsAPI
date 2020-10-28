@@ -47,6 +47,9 @@ passport.use(new BearerStrategy(
     },
 ));
 
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
 
 const jwtFunctions = {signJwt, passport};
 module.exports = jwtFunctions;

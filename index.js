@@ -2,10 +2,12 @@ const express = require('express');
 const app = express();
 const permissionHelper = require('./helpers/permissionHelper');
 const auth = require('./middlewares/jwtMiddleware');
+const passport = require('passport');
 
 // now, we don't need body-parser, express has their built-in body parser
 app.use(express.json());
-
+app.use(passport.initialize());
+app.use(passport.session());
 
 /**
  * ⚠️ Propietary code! Do not change! ⚠️
@@ -35,21 +37,23 @@ publicRoutesFilePaths.forEach((filePath) => {
   const route = require(relativeFilePath);
   app.use(route);
 });
-// // Load user routes:
-// userRoutesFilePaths.forEach((filePath) => {
-//   const relativeFilePath = `./${filePath}`;
-//   console.log(`${filePath} loaded for user!`);
-//   const route = require(relativeFilePath);
-//   app.use(route, auth.passport.authenticate('bearer', {session: false})
-//       , permissionHelper(['user', 'admin']));
-// });
-// Load admin routes:
-adminRoutesFilePaths.forEach((filePath) => {
+
+// Load user routes:
+userRoutesFilePaths.forEach((filePath) => {
   const relativeFilePath = `./${filePath}`;
-  console.log(`${filePath} loaded for admin!`);
+  console.log(`${filePath} loaded for user!`);
   const route = require(relativeFilePath);
   app.use(route, auth.passport.authenticate('bearer', {session: false})
-      , permissionHelper('admin'),
+      , permissionHelper(['user', 'admin']));
+});
+
+// Load admin routes:
+adminRoutesFilePaths.forEach((adminFilePath) => {
+  const relativeAdminFilePath = `./${adminFilePath}`;
+  console.log(`${adminFilePath} loaded for admin!`);
+  const adminRoute = require(relativeAdminFilePath);
+  app.use(adminRoute,
+      auth.passport.authenticate('bearer', {session: false}),
   );
 });
 

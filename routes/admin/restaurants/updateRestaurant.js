@@ -2,23 +2,24 @@
 const express = require('express');
 const router = express.Router();
 const editData = require('../../../controllers/editController');
+const permissionHelper = require('../../../helpers/permissionHelper');
 const auth = require('../../../middlewares/jwtMiddleware');
 
 
-router.patch('/admin/restaurants'), (req, res) => {
-      const result = editData(
-          'restaurants',
-          req.body.id,
-          req.body,
-      );
+router.patch('/admin/restaurants', permissionHelper(['admin']), (req, res) => {
+  const result = editData(
+      'restaurants',
+      req.body.id,
+      req.body,
+  );
 
-      if (!result) {
-        res.status(400).send('Bad request');
-      } else {
-        res.send(result);
-      }
-      return;
-    };
+  if (!result) {
+    res.status(400).send('Bad request');
+  } else {
+    res.send(result);
+  }
+  return;
+});
 
 
 module.exports = router;

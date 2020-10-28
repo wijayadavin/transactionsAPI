@@ -3,8 +3,11 @@ const router = express.Router();
 const getData = require('../../../controllers/getController');
 const editData = require('../../../controllers/editController');
 const auth = require('../../../middlewares/jwtMiddleware');
+const permissionHelper = require('../../../helpers/permissionHelper');
 
-router.patch('/u/:username'), (req, res) => {
+
+router.patch('/u/:username',
+    permissionHelper(['user', 'admin']), (req, res) => {
       // Check param if found or not
       const foundUser = getData('users', {id: req.user.id}[0]);
       if (!foundUser || foundUser.length == 0) {
@@ -34,7 +37,7 @@ router.patch('/u/:username'), (req, res) => {
         res.send(result);
       }
       return;
-    };
+    });
 
 
 module.exports = router;
