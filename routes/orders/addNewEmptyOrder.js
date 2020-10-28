@@ -7,7 +7,7 @@ const getToday = require('../../helpers/getTodayHelper');
 
 
 router.post('/orders',
-    auth.verifyJwt('role: user'), (req, res) => {
+    auth.passport.authenticate('bearer', {session: false}), (req, res) => {
       // Generate a new empty order:
       const newOrder = {
         id: uid(),

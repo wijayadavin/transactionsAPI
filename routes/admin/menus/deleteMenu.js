@@ -6,7 +6,7 @@ const auth = require('../../../middlewares/jwtMiddleware');
 
 
 router.delete('/admin/menus',
-    auth.verifyJwt('role: admin'), (req, res) => {
+    auth.passport.authenticate('bearer', {session: false}), (req, res) => {
       const result = db.removeDataByQuery(
           'menus',
           req.query,

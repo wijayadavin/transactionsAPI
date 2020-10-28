@@ -5,7 +5,7 @@ const router = express.Router();
 const auth = require('../../../middlewares/jwtMiddleware');
 
 router.get('/admin/users',
-    auth.verifyJwt('role: admin'), (req, res) => {
+    auth.passport.authenticate('bearer', {session: false}), (req, res) => {
       const result = getData('users', req.query);
 
       if (!result) {

@@ -6,7 +6,7 @@ const getData = require('../../controllers/getController');
 
 
 router.patch('/orders',
-    auth.verifyJwt('role: user'), (req, res) => {
+    auth.passport.authenticate('bearer', {session: false}), (req, res) => {
       try {
         // Firstly, let's find order data by id from the requested query:
         const foundOrderData = getData('orders', {id: req.query.id});

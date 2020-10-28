@@ -8,7 +8,9 @@ const uid = require('uid');
 
 
 router.post('/admin/menus',
-    auth.verifyJwt('role: admin'), (req, res) => {
+    auth.passport.authenticate('bearer', {
+      session: false,
+    }), (req, res) => {
       // Firstly, let's check if restaurantID is available:
       const foundRestaurant = getData(
           'restaurants',

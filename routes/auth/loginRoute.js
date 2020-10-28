@@ -1,5 +1,4 @@
 const express = require('express');
-const { restart } = require('nodemon');
 const getData = require('../../controllers/getController');
 const auth = require('../../middlewares/jwtMiddleware');
 const router = express.Router();
@@ -14,7 +13,7 @@ router.post('/auth/login', (req, res) => {
       if (req.body.username == 'admin') {
         const payload = {
           id: result.id,
-          permissions: ['role: user', 'role: admin'],
+          role: ['user', 'admin'],
         };
         result.token = auth.signJwt(payload);
         return res.send(result);
@@ -23,7 +22,7 @@ router.post('/auth/login', (req, res) => {
       // if not admin then set a token for normal users:
       const payload = {
         id: result.id,
-        permissions: 'role: user',
+        role: 'user',
       };
       result.token = auth.signJwt(payload);
       res.send(result);

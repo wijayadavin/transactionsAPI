@@ -7,7 +7,7 @@ const uid = require('uid');
 
 
 router.post('/admin/restaurants',
-    auth.verifyJwt('role: admin'), (req, res) => {
+    auth.passport.authenticate('bearer', {session: false}), (req, res) => {
       req.body.id = uid();
       const result = addData('restaurants', req.body);
 

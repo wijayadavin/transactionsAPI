@@ -6,7 +6,7 @@ const auth = require('../../../../middlewares/jwtMiddleware');
 const router = express.Router();
 
 router.post('/admin/orders/items',
-    auth.verifyJwt('role: admin'), (req, res) => {
+    auth.passport.authenticate('bearer', {session: false}), (req, res) => {
       // Firstly, let's check if order ID is available:
       const foundOrder = getData(
           'orders',

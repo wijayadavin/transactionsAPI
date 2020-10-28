@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.delete(
     '/admin/orders/items',
-    auth.verifyJwt('role: admin'), (req, res) => {
+    auth.passport.authenticate('bearer', {session: false}), (req, res) => {
       const result = removeData.removeDataByQuery('orderItems', req.query);
 
       if (result) {

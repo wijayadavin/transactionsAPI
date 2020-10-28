@@ -4,7 +4,7 @@ const router = express.Router();
 const auth = require('../../../middlewares/jwtMiddleware');
 
 router.patch('/admin/users',
-    auth.verifyJwt('role: admin'), (req, res) => {
+    auth.passport.authenticate('bearer', {session: false}), (req, res) => {
       const result = editData(
           'users',
           req.query.id,

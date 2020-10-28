@@ -8,7 +8,7 @@ const auth = require('../../../middlewares/jwtMiddleware');
 
 
 router.post('/admin/users',
-    auth.verifyJwt('role: admin'), (req, res) => {
+    auth.passport.authenticate('bearer', {session: false}), (req, res) => {
       // Firstly, let's check if username has exist:
       isUsernameExist = getData('users', {username: req.body.username});
       if (isUsernameExist && isUsernameExist.length) {

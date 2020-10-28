@@ -5,7 +5,7 @@ const router = express.Router();
 const auth = require('../../../middlewares/jwtMiddleware');
 
 router.get('/order/items',
-    auth.verifyJwt('role: user'), (req, res) => {
+    auth.passport.authenticate('bearer', {session: false}), (req, res) => {
       /**
          * instead of using orderItems.id we are using the orderID,
          * cause every order items should have the same

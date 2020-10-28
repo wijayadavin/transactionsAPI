@@ -5,7 +5,7 @@ const editData = require('../../controllers/editController');
 const auth = require('../../middlewares/jwtMiddleware');
 
 router.patch('/u/:username',
-    auth.verifyJwt('role: user'), (req, res) => {
+    auth.passport.authenticate('bearer', {session: false}), (req, res) => {
       // Check param if found or not
       const foundUser = getData('users', {id: req.user.id}[0]);
       if (!foundUser || foundUser.length == 0) {

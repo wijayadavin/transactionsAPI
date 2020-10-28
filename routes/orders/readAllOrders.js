@@ -5,7 +5,7 @@ const router = express.Router();
 
 
 router.get('/orders',
-    auth.verifyJwt('role: user'), (req, res) => {
+    auth.passport.authenticate('bearer', {session: false}), (req, res) => {
       // read all order with userID == user's ID from the token
       const result = getData('orders', {userID: req.user.id});
 

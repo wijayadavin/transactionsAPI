@@ -8,7 +8,7 @@ const auth = require('../../../middlewares/jwtMiddleware');
 
 
 router.post('/orders/items',
-    auth.verifyJwt('role: user'), (req, res) => {
+    auth.passport.authenticate('bearer', {session: false}), (req, res) => {
       // Get the order data from the requested orderID:
       foundOrder = getData('orders', {id: req.body.orderID})[0];
       if (!foundOrder) {
