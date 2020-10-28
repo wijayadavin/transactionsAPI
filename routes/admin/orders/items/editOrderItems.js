@@ -1,6 +1,6 @@
 const express = require('express');
 const editData = require('../../../../controllers/editController');
-const permissionHelper = require('../../../../helpers/permissionHelper');
+const permissionHelper = require('../../../../controllers/userController');
 const auth = require('../../../../middlewares/jwtMiddleware');
 const router = express.Router();
 

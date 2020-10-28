@@ -1,10 +1,9 @@
-/* eslint-disable new-cap */
 const express = require('express');
 const router = express.Router();
 const addData = require('../../../controllers/addController');
 const auth = require('../../../middlewares/jwtMiddleware');
 const uid = require('uid');
-const permissionHelper = require('../../../helpers/permissionHelper');
+const permissionHelper = require('../../../controllers/userController');
 
 
 router.post('/admin/restaurants', permissionHelper(['admin']), (req, res) => {

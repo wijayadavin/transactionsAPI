@@ -1,9 +1,9 @@
 const express = require('express');
 const editData = require('../../../../controllers/editController');
 const getData = require('../../../../controllers/getController');
+const permissionHelper = require('../../../../controllers/userController');
 const router = express.Router();
 const auth = require('../../../../middlewares/jwtMiddleware');
-const permissionHelper = require('../../../../helpers/permissionHelper');
 
 
 router.get('/order/items'),

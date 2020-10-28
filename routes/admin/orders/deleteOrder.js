@@ -1,8 +1,9 @@
 const express = require('express');
 const removeData = require('../../../controllers/removeController');
-const permissionHelper = require('../../../helpers/permissionHelper');
 const auth = require('../../../middlewares/jwtMiddleware');
 const router = express.Router();
+const permissionHelper = require('../../../controllers/userController');
+
 
 router.delete('/admin/orders'), permissionHelper(['admin']), (req, res) => {
   const result = removeData.removeDataByQuery(

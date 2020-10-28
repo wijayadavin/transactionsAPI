@@ -1,9 +1,9 @@
-
 const express = require('express');
 const getData = require('../../../controllers/getController');
-const permissionHelper = require('../../../helpers/permissionHelper');
+const permissionHelper = require('../../../controllers/userController');
 const router = express.Router();
 const auth = require('../../../middlewares/jwtMiddleware');
+
 
 router.get('/admin/users'), permissionHelper(['admin']), (req, res) => {
   const result = getData('users', req.query);

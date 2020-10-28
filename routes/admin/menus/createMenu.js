@@ -5,8 +5,7 @@ const addData = require('../../../controllers/addController');
 const getData = require('../../../controllers/getController');
 const auth = require('../../../middlewares/jwtMiddleware');
 const uid = require('uid');
-permissionHelper = require('../../../helpers/permissionHelper');
-
+const permissionHelper = require('../../../controllers/userController');
 
 router.post('/admin/menus', permissionHelper(['admin']), (req, res) => {
   // Firstly, let's check if restaurantID is available:

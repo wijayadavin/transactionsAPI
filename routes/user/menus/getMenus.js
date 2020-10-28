@@ -1,6 +1,7 @@
 const express = require('express');
 const getData = require('../../../controllers/getController');
-const permissionHelper = require('../../../helpers/permissionHelper');
+const permissionHelper = require('../../../controllers/userController');
+
 const router = express.Router();
 
 router.get('/menus', permissionHelper(['user', 'admin']), (req, res) => {

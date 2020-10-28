@@ -1,6 +1,6 @@
 const express = require('express');
+const permissionHelper = require('../../../../controllers/userController');
 const removeData = require('../../../../controllers/removeController');
-const permissionHelper = require('../../../../helpers/permissionHelper');
 const auth = require('../../../../middlewares/jwtMiddleware');
 const router = express.Router();
 

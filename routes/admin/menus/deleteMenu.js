@@ -1,8 +1,8 @@
 /* eslint-disable new-cap */
 const express = require('express');
+const permissionHelper = require('../../../controllers/userController');
 const router = express.Router();
 const db = require('../../../controllers/removeController');
-const permissionHelper = require('../../../helpers/permissionHelper');
 const auth = require('../../../middlewares/jwtMiddleware');
 
 

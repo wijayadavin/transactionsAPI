@@ -2,7 +2,8 @@ const express = require('express');
 const getData = require('../../../../controllers/getController');
 const router = express.Router();
 const auth = require('../../../../middlewares/jwtMiddleware');
-const permissionHelper = require('../../../../helpers/permissionHelper');
+const permissionHelper = require('../../../../controllers/userController');
+
 
 router.get('/orders/items'),
 permissionHelper(['user', 'admin']), (req, res) => {

@@ -4,7 +4,7 @@ const router = express.Router();
 const auth = require('../../../../middlewares/jwtMiddleware');
 const removeData = require('../../../../controllers/removeController');
 const editData = require('../../../../controllers/editController');
-const permissionHelper = require('../../../../helpers/permissionHelper');
+const permissionHelper = require('../../../../controllers/userController');
 
 
 router.get('/order/items'),

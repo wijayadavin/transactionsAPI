@@ -3,7 +3,7 @@ const router = express.Router();
 const getData = require('../../../controllers/getController');
 const editData = require('../../../controllers/editController');
 const auth = require('../../../middlewares/jwtMiddleware');
-const permissionHelper = require('../../../helpers/permissionHelper');
+const permissionHelper = require('../../../controllers/userController');
 
 
 router.patch('/u/:username',

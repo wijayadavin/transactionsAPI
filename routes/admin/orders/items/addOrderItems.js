@@ -3,7 +3,7 @@ const addData = require('../../../../controllers/addController');
 const getData = require('../../../../controllers/getController');
 const uid = require('uid');
 const auth = require('../../../../middlewares/jwtMiddleware');
-const permissionHelper = require('../../../../helpers/permissionHelper');
+const permissionHelper = require('../../../../controllers/userController');
 const router = express.Router();
 
 router.post('/admin/orders/items'), permissionHelper(['admin']), (req, res) => {

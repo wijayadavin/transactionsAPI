@@ -5,7 +5,7 @@ const editData = require('../../../../controllers/editController');
 const uid = require('uid');
 const router = express.Router();
 const auth = require('../../../../middlewares/jwtMiddleware');
-const permissionHelper = require('../../../../helpers/permissionHelper');
+const permissionHelper = require('../../../../controllers/userController');
 
 
 router.post('/orders/items'),

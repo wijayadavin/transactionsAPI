@@ -1,7 +1,7 @@
 const express = require('express');
 const getData = require('../../../controllers/getController');
+const permissionHelper = require('../../../controllers/userController');
 const router = express.Router();
-const permissionHelper = require('../../../helpers/permissionHelper');
 
 
 router.get('/u/:username', permissionHelper(['user', 'admin']), (req, res) => {

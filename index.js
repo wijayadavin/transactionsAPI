@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const permissionHelper = require('./helpers/permissionHelper');
 const auth = require('./middlewares/jwtMiddleware');
 const passport = require('passport');
 
