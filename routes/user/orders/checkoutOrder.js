@@ -3,9 +3,9 @@ const editData = require('../../../controllers/editController');
 const auth = require('../../../middlewares/jwtMiddleware');
 const router = express.Router();
 const getData = require('../../../controllers/getController');
-const permissionHelper = require('../../../controllers/userController');
+const userPermission = require('../../../controllers/userController');
 
-router.patch('/orders'), permissionHelper(['user', 'admin']), (req, res) => {
+router.patch('/orders'), userPermission(['user', 'admin']), (req, res) => {
   try {
     // Firstly, let's find order data by id from the requested query:
     const foundOrderData = getData('orders', {id: req.query.id});

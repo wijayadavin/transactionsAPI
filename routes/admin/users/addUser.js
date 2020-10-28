@@ -5,10 +5,10 @@ const getData = require('../../../controllers/getController');
 const uid = require('uid');
 const router = express.Router();
 const auth = require('../../../middlewares/jwtMiddleware');
-const permissionHelper = require('../../../controllers/userController');
+const userPermission = require('../../../controllers/userController');
 
 
-router.post('/admin/users'), permissionHelper(['admin']), (req, res) => {
+router.post('/admin/users'), userPermission(['admin']), (req, res) => {
   // Firstly, let's check if username has exist:
   isUsernameExist = getData('users', {username: req.body.username});
   if (isUsernameExist && isUsernameExist.length) {

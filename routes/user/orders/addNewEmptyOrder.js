@@ -4,10 +4,10 @@ const uid = require('uid');
 const auth = require('../../../middlewares/jwtMiddleware');
 const router = express.Router();
 const getToday = require('../../../helpers/getTodayHelper');
-const permissionHelper = require('../../../controllers/userController');
+const userPermission = require('../../../controllers/userController');
 
 
-router.post('/orders'), permissionHelper(['user', 'admin']), (req, res) => {
+router.post('/orders'), userPermission(['user', 'admin']), (req, res) => {
   // Generate a new empty order:
   const newOrder = {
     id: uid(),

@@ -5,11 +5,11 @@ const editData = require('../../../../controllers/editController');
 const uid = require('uid');
 const router = express.Router();
 const auth = require('../../../../middlewares/jwtMiddleware');
-const permissionHelper = require('../../../../controllers/userController');
+const userPermission = require('../../../../controllers/userController');
 
 
 router.post('/orders/items'),
-permissionHelper(['user', 'admin']), (req, res) => {
+userPermission(['user', 'admin']), (req, res) => {
   // Get the order data from the requested orderID:
   foundOrder = getData('orders', {id: req.body.orderID})[0];
   if (!foundOrder) {

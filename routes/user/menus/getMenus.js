@@ -1,10 +1,10 @@
 const express = require('express');
 const getData = require('../../../controllers/getController');
-const permissionHelper = require('../../../controllers/userController');
+const userPermission = require('../../../controllers/userController');
 
 const router = express.Router();
 
-router.get('/menus', permissionHelper(['user', 'admin']), (req, res) => {
+router.get('/menus', userPermission(['user', 'admin']), (req, res) => {
   const query = req.query;
   const result = getData('menus', query);
   if (!result) {

@@ -1,10 +1,10 @@
 const express = require('express');
 const getData = require('../../../controllers/getController');
-const permissionHelper = require('../../../controllers/userController');
+const userPermission = require('../../../controllers/userController');
 const auth = require('../../../middlewares/jwtMiddleware');
 const router = express.Router();
 
-router.get('/orders', permissionHelper(['user', 'admin']), (req, res) => {
+router.get('/orders', userPermission(['user', 'admin']), (req, res) => {
   // read all order with userID == user's ID from the token
   const result = getData('orders', {userID: req.user.id});
 

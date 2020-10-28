@@ -1,12 +1,12 @@
 /* eslint-disable new-cap */
 const express = require('express');
-const permissionHelper = require('../../../controllers/userController');
+const userPermission = require('../../../controllers/userController');
 const router = express.Router();
 const db = require('../../../controllers/removeController');
 const auth = require('../../../middlewares/jwtMiddleware');
 
 
-router.delete('/admin/menus', permissionHelper(['admin']), (req, res) => {
+router.delete('/admin/menus', userPermission(['admin']), (req, res) => {
   const result = db.removeDataByQuery(
       'menus',
       req.query,

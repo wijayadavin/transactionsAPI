@@ -1,11 +1,11 @@
 const express = require('express');
 const getData = require('../../../controllers/getController');
-const permissionHelper = require('../../../controllers/userController');
+const userPermission = require('../../../controllers/userController');
 const removeData = require('../../../controllers/removeController');
 const auth = require('../../../middlewares/jwtMiddleware');
 const router = express.Router();
 
-router.delete('/orders', permissionHelper(['user', 'admin']), (req, res) => {
+router.delete('/orders', userPermission(['user', 'admin']), (req, res) => {
   try {
     // Firstly, let's find order data by id from the requested query:
     const foundOrderData = getData('orders', req.query);

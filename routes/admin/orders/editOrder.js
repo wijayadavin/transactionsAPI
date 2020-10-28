@@ -1,10 +1,10 @@
 const express = require('express');
 const editData = require('../../../controllers/editController');
-const permissionHelper = require('../../../controllers/userController');
+const userPermission = require('../../../controllers/userController');
 const auth = require('../../../middlewares/jwtMiddleware');
 const router = express.Router();
 
-router.patch('/admin/orders'), permissionHelper(['admin']), (req, res) => {
+router.patch('/admin/orders'), userPermission(['admin']), (req, res) => {
   const result = editData(
       'orders',
       req.query.id,

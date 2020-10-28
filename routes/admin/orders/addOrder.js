@@ -3,10 +3,10 @@ const addData = require('../../../controllers/addController');
 const getData = require('../../../controllers/getController');
 const uid = require('uid');
 const auth = require('../../../middlewares/jwtMiddleware');
-const permissionHelper = require('../../../controllers/userController');
+const userPermission = require('../../../controllers/userController');
 const router = express.Router();
 
-router.post('/admin/orders'), permissionHelper(['admin']), (req, res) => {
+router.post('/admin/orders'), userPermission(['admin']), (req, res) => {
   // Firstly, let's check if userID is available:
   const foundUser = getData(
       'users',

@@ -3,9 +3,9 @@ const express = require('express');
 const router = express.Router();
 const editData = require('../../../controllers/editController');
 const auth = require('../../../middlewares/jwtMiddleware');
-permissionHelper = require('../../../controllers/userController');
+userPermission = require('../../../controllers/userController');
 
-router.patch('/admin/menus', permissionHelper(['admin']), (req, res) => {
+router.patch('/admin/menus', userPermission(['admin']), (req, res) => {
   const result = editData('menus',
       req.body.id,
       req.body,

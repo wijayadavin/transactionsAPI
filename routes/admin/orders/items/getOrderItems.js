@@ -1,11 +1,11 @@
 const express = require('express');
 const getData = require('../../../../controllers/getController');
-const permissionHelper = require('../../../../controllers/userController');
+const userPermission = require('../../../../controllers/userController');
 const auth = require('../../../../middlewares/jwtMiddleware');
 const router = express.Router();
 
 router.get('/admin/orders/items'),
-permissionHelper(['admin']), (req, res) => {
+userPermission(['admin']), (req, res) => {
   const result = getData('orderItems', req.query);
 
   if (result) {

@@ -1,13 +1,13 @@
 const express = require('express');
 const editData = require('../../../../controllers/editController');
 const getData = require('../../../../controllers/getController');
-const permissionHelper = require('../../../../controllers/userController');
+const userPermission = require('../../../../controllers/userController');
 const router = express.Router();
 const auth = require('../../../../middlewares/jwtMiddleware');
 
 
 router.get('/order/items'),
-permissionHelper(['user', 'admin']), (req, res) => {
+userPermission(['user', 'admin']), (req, res) => {
   /**
          * instead of using orderItems.id we are using the orderID,
          * cause every order items should have the same

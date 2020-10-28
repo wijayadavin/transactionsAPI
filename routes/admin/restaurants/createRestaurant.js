@@ -3,10 +3,10 @@ const router = express.Router();
 const addData = require('../../../controllers/addController');
 const auth = require('../../../middlewares/jwtMiddleware');
 const uid = require('uid');
-const permissionHelper = require('../../../controllers/userController');
+const userPermission = require('../../../controllers/userController');
 
 
-router.post('/admin/restaurants', permissionHelper(['admin']), (req, res) => {
+router.post('/admin/restaurants', userPermission(['admin']), (req, res) => {
   req.body.id = uid();
   const result = addData('restaurants', req.body);
 
