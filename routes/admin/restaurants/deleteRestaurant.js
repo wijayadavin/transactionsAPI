@@ -5,8 +5,7 @@ const db = require('../../../controllers/removeController');
 const auth = require('../../../middlewares/jwtMiddleware');
 
 
-router.delete('/admin/restaurants',
-    auth.passport.authenticate('bearer', {session: false}), (req, res) => {
+router.delete('/admin/restaurants'), (req, res) => {
       const result = db.removeDataByQuery(
           'restaurants',
           req.body
@@ -18,7 +17,7 @@ router.delete('/admin/restaurants',
         res.send(result);
       }
       return;
-    });
+    };
 
 
 module.exports = router;

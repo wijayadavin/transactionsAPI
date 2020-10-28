@@ -7,8 +7,7 @@ const auth = require('../../../middlewares/jwtMiddleware');
 const uid = require('uid');
 
 
-router.post('/admin/menus',
-    auth.passport.authenticate('bearer', {session: false}), (req, res) => {
+router.post('/admin/menus'), (req, res) => {
       // Firstly, let's check if restaurantID is available:
       const foundRestaurant = getData(
           'restaurants',
@@ -27,7 +26,7 @@ router.post('/admin/menus',
         res.send(result);
       }
       return;
-    });
+    };
 
 
 module.exports = router;

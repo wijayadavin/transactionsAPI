@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
-const passport = require('passport')
+const permissionHelper = require('./helpers/permissionHelper');
+const auth = require('./middlewares/jwtMiddleware');
+
 // now, we don't need body-parser, express has their built-in body parser
 app.use(express.json());
 
@@ -21,12 +23,34 @@ const publicRoutesPath = path.resolve('routes/public/');
 const userRoutesPath = path.resolve('routes/user/');
 const adminRoutesPath = path.resolve('routes/admin/');
 
-const filePaths = readDir.readDirDeepSync(publicRoutesPath);
-filePaths.forEach((filePath) => {
+// Get file paths:
+const publicRoutesFilePaths = readDir.readDirDeepSync(publicRoutesPath);
+const userRoutesFilePaths = readDir.readDirDeepSync(userRoutesPath);
+const adminRoutesFilePaths = readDir.readDirDeepSync(adminRoutesPath);
+
+// Load public routes:
+publicRoutesFilePaths.forEach((filePath) => {
   const relativeFilePath = `./${filePath}`;
-  console.log(`${filePath} loaded!`);
+  console.log(`${filePath} loaded for public!`);
   const route = require(relativeFilePath);
   app.use(route);
+});
+// // Load user routes:
+// userRoutesFilePaths.forEach((filePath) => {
+//   const relativeFilePath = `./${filePath}`;
+//   console.log(`${filePath} loaded for user!`);
+//   const route = require(relativeFilePath);
+//   app.use(route, auth.passport.authenticate('bearer', {session: false})
+//       , permissionHelper(['user', 'admin']));
+// });
+// Load admin routes:
+adminRoutesFilePaths.forEach((filePath) => {
+  const relativeFilePath = `./${filePath}`;
+  console.log(`${filePath} loaded for admin!`);
+  const route = require(relativeFilePath);
+  app.use(route, auth.passport.authenticate('bearer', {session: false})
+      , permissionHelper('admin'),
+  );
 });
 
 

@@ -5,8 +5,7 @@ const editData = require('../../../controllers/editController');
 const auth = require('../../../middlewares/jwtMiddleware');
 
 
-router.patch('/admin/restaurants',
-    auth.passport.authenticate('bearer', {session: false}), (req, res) => {
+router.patch('/admin/restaurants'), (req, res) => {
       const result = editData(
           'restaurants',
           req.body.id,
@@ -19,7 +18,7 @@ router.patch('/admin/restaurants',
         res.send(result);
       }
       return;
-    });
+    };
 
 
 module.exports = router;

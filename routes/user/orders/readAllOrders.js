@@ -4,8 +4,7 @@ const auth = require('../../../middlewares/jwtMiddleware');
 const router = express.Router();
 
 
-router.get('/orders',
-    auth.passport.authenticate('bearer', {session: false}), (req, res) => {
+router.get('/orders'), (req, res) => {
       // read all order with userID == user's ID from the token
       const result = getData('orders', {userID: req.user.id});
 
@@ -17,7 +16,7 @@ router.get('/orders',
         res.status(404).send('data not found');
       }
       return;
-    });
+    };
 
 
 module.exports = router;

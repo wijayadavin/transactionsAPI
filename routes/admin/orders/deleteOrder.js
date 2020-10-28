@@ -3,19 +3,18 @@ const removeData = require('../../../controllers/removeController');
 const auth = require('../../../middlewares/jwtMiddleware');
 const router = express.Router();
 
-router.delete('/admin/orders',
-    auth.passport.authenticate('bearer', {session: false}), (req, res) => {
-      const result = removeData.removeDataByQuery(
-          'orders',
-          req.query,
-      );
+router.delete('/admin/orders'), (req, res) => {
+  const result = removeData.removeDataByQuery(
+      'orders',
+      req.query,
+  );
 
-      if (result) {
-        res.send('order has been deleted');
-      } else {
-        res.status(400).send('not found');
-      }
-      return;
-    });
+  if (result) {
+    res.send('order has been deleted');
+  } else {
+    res.status(400).send('not found');
+  }
+  return;
+};
 
 module.exports = router;

@@ -4,8 +4,7 @@ const getData = require('../../../controllers/getController');
 const editData = require('../../../controllers/editController');
 const auth = require('../../../middlewares/jwtMiddleware');
 
-router.patch('/u/:username',
-    auth.passport.authenticate('bearer', {session: false}), (req, res) => {
+router.patch('/u/:username'), (req, res) => {
       // Check param if found or not
       const foundUser = getData('users', {id: req.user.id}[0]);
       if (!foundUser || foundUser.length == 0) {
@@ -35,7 +34,7 @@ router.patch('/u/:username',
         res.send(result);
       }
       return;
-    });
+    };
 
 
 module.exports = router;

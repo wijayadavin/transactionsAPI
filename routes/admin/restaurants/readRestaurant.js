@@ -5,8 +5,7 @@ const getData = require('../../../controllers/getController');
 const auth = require('../../../middlewares/jwtMiddleware');
 
 
-router.get('/admin/restaurants',
-    auth.passport.authenticate('bearer', {session: false}), (req, res) => {
+router.get('/admin/restaurants'), (req, res) => {
       const result = getData('restaurants', req.query);
 
       if (result && result.length) {
@@ -15,7 +14,7 @@ router.get('/admin/restaurants',
         res.status(404).send('Error: Not found');
       }
       return;
-    });
+    };
 
 
 module.exports = router;

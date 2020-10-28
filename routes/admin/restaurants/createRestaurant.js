@@ -6,8 +6,7 @@ const auth = require('../../../middlewares/jwtMiddleware');
 const uid = require('uid');
 
 
-router.post('/admin/restaurants',
-    auth.passport.authenticate('bearer', {session: false}), (req, res) => {
+router.post('/admin/restaurants'), (req, res) => {
       req.body.id = uid();
       const result = addData('restaurants', req.body);
 
@@ -21,7 +20,7 @@ router.post('/admin/restaurants',
         res.send(result);
       }
       return;
-    });
+    };
 
 
 module.exports = router;

@@ -5,8 +5,7 @@ const auth = require('../../../middlewares/jwtMiddleware');
 const router = express.Router();
 
 
-router.delete('/orders',
-    auth.passport.authenticate('bearer', {session: false}), (req, res) => {
+router.delete('/orders'), (req, res) => {
       try {
         // Firstly, let's find order data by id from the requested query:
         const foundOrderData = getData('orders', req.query);
@@ -53,7 +52,7 @@ router.delete('/orders',
           res.status(500).send('Oops something is wrong here');
         }
       }
-    });
+    };
 
 
 module.exports = router;
