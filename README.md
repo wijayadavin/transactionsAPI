@@ -34,7 +34,7 @@ Read all restaurants in our web (i.e. restaurant name and address)
 
 ## A.2. User-only:
 Login as a user to get access to these sites:
-#### **/profile** - READ & UPDATE user's profile (not other users) ✔️
+#### **/u/user's_username** - READ & UPDATE user's profile (not other users) ✔️
 #### **/orders/items** - CRUD order items ✔️
 - CREATE a new order item (the menu in order item must be from one restaurant only)
 - READ an order item by Query
@@ -63,16 +63,16 @@ Login as an admin user to get access to special permissions:
 
 #### C.1. Make restaurants and menus as an admin:
 
-1. Register as an Admin (username 'admin' for the first admin)
-2. Login (received a token for an admin)
-3. Create new restaurants
-4. Create new menus for the restaurants that was created before
+1. '/auth/register' ➤ Register as an Admin (username 'admin' for the first admin)
+2. '/auth/login' ➤ Login (received a token for an admin)
+3. '/admin/restaurants' ➤ Create new restaurants
+4. '/admin/menus' ➤ Create new menus for the restaurants that was created before
 
 #### C.2. Make an order as a normal user (buyer):
 
-1. Register as an User
-2. Login (received a token for a normal user)
-3. Browse for menus
-4. Create a new order (empty basket)
-4. Pick some menus from the same restaurant (added into the basket)
-5. submit the order (Order status changed from draft (status = 0), into checkout (status = 1))
+1. '/auth/register' ➤ Register as an User
+2. '/auth/login' ➤ Login (received a token for a normal user)
+3. '/menus' ➤ Browse for menus
+4. '/orders' ➤ Create a new order (empty basket)
+4. '/orders/items' ➤ Pick some menus from the same restaurant (added into the basket)
+5. '/orders' ➤ submit the order
