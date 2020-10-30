@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const jwtConfig = require('../jwtConfig');
-const passport = require('passport');
+const passportJwt = require('passport');
 const BearerStrategy = require('passport-http-bearer').Strategy;
 
 
@@ -29,10 +29,20 @@ function signJwt(data) {
   return token;
 }
 
+passportJwt.serializeUser(function(user, done) {
+  console.log('serializeUser');
+  return done(null, user);
+});
 
-passport.use(new BearerStrategy(
+passportJwt.deserializeUser(function(user, done) {
+  console.log('deserializeUser');
+  return done(null, user);
+});
+
+passportJwt.use(new BearerStrategy(
     function(token, done) {
       jwt.verify(token, jwtConfig.secret, (err, user) => {
+        console.log(user);
         // if error, return error:
         if (err) {
           return done(err);
@@ -45,11 +55,8 @@ passport.use(new BearerStrategy(
         return done(null, user);
       });
     },
-));
+))
 
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
 
-const jwtFunctions = {signJwt, passport};
+const jwtFunctions = {signJwt, passportJwt};
 module.exports = jwtFunctions;

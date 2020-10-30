@@ -1,10 +1,16 @@
 const express = require('express');
 const getData = require('../../../controllers/getController');
 const auth = require('../../../middlewares/jwtMiddleware');
+const urlencodedParser = require('body-parser').urlencoded({ extended: false })
 const router = express.Router();
 
 
-router.post('/auth/login', (req, res) => {
+router.get('/auth/login', (req, res) => {
+  const users = getData('users')
+  res.status(200).render('login');
+})
+
+router.post('/auth/login', urlencodedParser, (req, res) => {
   if (req.body.username && req.body.password) {
     const result = getData('users', req.body)[0];
 
@@ -16,7 +22,7 @@ router.post('/auth/login', (req, res) => {
           role: ['user', 'admin'],
         };
         result.token = auth.signJwt(payload);
-        return res.send(result);
+        return res.header('Authorization', result.token).redirect(`../../u/${result.username}`);
       }
 
       // if not admin then set a token for normal users:
@@ -25,7 +31,7 @@ router.post('/auth/login', (req, res) => {
         role: 'user',
       };
       result.token = auth.signJwt(payload);
-      res.send(result);
+      return res.header('Authorization', result.token).redirect(`../../u/${result.username}`);
     } else {
       res.status(400).send('Bad request');
     }

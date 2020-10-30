@@ -5,9 +5,16 @@ const router = express.Router();
 // uid is a id generator library
 // Reference: https://www.npmjs.com/package/uid
 const uid = require('uid');
+const urlencodedParser = require('body-parser').urlencoded({ extended: false })
 
 
-router.post('/auth/register', (req, res) => {
+router.get('/auth/register', (req, res) => {
+  const users = getData('users')
+  res.status(200).render('register', { "users": users });
+})
+
+router.post('/auth/register', urlencodedParser, (req, res) => {
+  console.log(req.body);
   // check if username or password are available:
   if (req.body.username && req.body.password) {
   // check if username has exist:
@@ -25,7 +32,7 @@ router.post('/auth/register', (req, res) => {
     }
     const result = addData('users', req.body);
     if (result) {
-      return res.send(result);
+      return res.render('register-success', {user: result});
     } else {
     // called if request body object key is lacking:
       return res.status(400).send('Bad request');

@@ -1,9 +1,10 @@
 const express = require('express');
 const app = express();
 const passport = require('passport');
+const {passportJwt} = require('./middlewares/jwtMiddleware')
 const cookieSession = require('cookie-session')
-
 // now, we don't need body-parser, express has their built-in body parser
+app.set('view engine', 'ejs')
 app.use(express.json());
 app.use(passport.initialize());
 app.use(passport.session());
@@ -46,7 +47,9 @@ userRoutesFilePaths.forEach((filePath) => {
   const relativeFilePath = `./${filePath}`;
   console.log(`${filePath} loaded for user!`);
   const route = require(relativeFilePath);
-  app.use(route);
+  app.use(route,
+    // passportJwt.authenticate('bearer', { session: true }),
+  );
 });
 
 // Load admin routes:
@@ -54,7 +57,9 @@ adminRoutesFilePaths.forEach((adminFilePath) => {
   const relativeAdminFilePath = `./${adminFilePath}`;
   console.log(`${adminFilePath} loaded for admin!`);
   const adminRoute = require(relativeAdminFilePath);
-  app.use(adminRoute);
+  app.use(adminRoute,
+    // passportJwt.authenticate('bearer', { session: true }),
+  );
 });
 
 

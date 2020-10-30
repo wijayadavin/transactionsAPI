@@ -1,8 +1,12 @@
 const express = require('express');
+const getData = require('../../controllers/getController');
 const router = express.Router();
 
+
 router.get('/', (req, res) => {
-  res.send('hello world!');
+  const users = getData('users')
+  console.log(users);
+  res.status(200).render('index', { "users": users });
 });
 
 module.exports = router;
