@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <title>My RESTful Website</title>
+</head>
+
+<body>
+  <%- include('partials/nav.ejs') %>
+  <span class="border">
+    <li class="list-group-item active col-md-4">Add a menu here</li>
+    <form class="px-4 py-3" action="/auth/register" method="post">
+      <div class="form-group col-md-3">
+        <input id="s-name" name="restaurantID" type="text" class="form-control" placeholder="restaurantID">
+      </div>
+      <div class="form-group col-md-3">
+        <input id="s-name" name="name" type="text" class="form-control" placeholder="Menu Name">
+      </div>
+      <div class="form-group col-md-3">
+        <input id="s-address" name="price" type="text" class="form-control" placeholder="Menu price">
+      </div>
+      <button id="btn-submit" type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </span>
+
+
+  <br><br><br><br><br><br><br><br><br><br><br>
+
+
+  <script src="../scripts/script.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -16,7 +16,7 @@ router.post('/admin/orders'), userPermission(['admin']), (req, res) => {
   // Secondly, let's check if userID is available:
 
   // If ok, continue:
-  req.body.id = uid();
+  req.body.id = `/orders/${uid()}`;
   const result = addData('orders', req.body);
 
   if (!result) {

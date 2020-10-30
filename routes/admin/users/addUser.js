@@ -14,7 +14,7 @@ router.post('/admin/users'), userPermission(['admin']), (req, res) => {
   if (isUsernameExist && isUsernameExist.length) {
     res.status(409).send('The same username has exist');
   }
-  req.body.id = uid();
+  req.body.id = `/u/${uid()}`;
   const result = addData('users', req.body);
 
   // If ok, continue:

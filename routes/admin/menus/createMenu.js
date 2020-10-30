@@ -17,7 +17,7 @@ router.post('/admin/menus', userPermission(['admin']), (req, res) => {
   };
 
   // If ok, continue:
-  req.body.id = uid();
+  req.body.id = `/menus/${uid()}`;
   const result = addData('menus', req.body);
 
   if (!result) {

@@ -6,7 +6,7 @@ const userPermission = require('../../../controllers/userController');
 
 
 router.post('/admin/restaurants', userPermission(['admin']), (req, res) => {
-  req.body.id = uid();
+  req.body.id = `/restaurants/${uid()}`;
   const result = addData('restaurants', req.body);
 
   // Firstly let's check if the restaurant name has exist:
