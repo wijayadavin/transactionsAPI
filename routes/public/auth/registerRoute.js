@@ -14,7 +14,6 @@ router.get('/auth/register', (req, res) => {
 })
 
 router.post('/auth/register', urlencodedParser, (req, res) => {
-  console.log(req.body);
   // check if username or password are available:
   if (req.body.username && req.body.password) {
   // check if username has exist:

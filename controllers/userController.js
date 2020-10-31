@@ -1,6 +1,5 @@
 module.exports = function permission(roles = []) {
   return (req, res, next) => {
-    console.log(req);
     // Convert string roles into array:
     if (typeof roles === 'string') {
       roles = [roles];

@@ -5,7 +5,6 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   const users = getData('users')
-  console.log(users);
   res.status(200).render('index', { "users": users });
 });
 
