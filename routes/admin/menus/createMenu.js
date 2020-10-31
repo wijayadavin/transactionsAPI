@@ -23,7 +23,7 @@ router.post('/admin/menus', userPermission(['admin']), (req, res) => {
   if (!result) {
     res.status(400).send('Wrong body');
   } else {
-    res.send(result);
+    res.redirect('../${req.body.restaurantID}');
   }
   return;
 });
