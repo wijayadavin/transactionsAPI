@@ -10,7 +10,6 @@ router.post('/admin/restaurants',
 urlencodedParser,
 // userPermission(['admin']),
 (req, res) => {
-  console.log(req.body);
   // Firstly let's check if the restaurant name has exist:
   if(getData('restaurants', req.body.name).length > 0) {
     return res.status(405).send('Error: The same restaurant name has exist')

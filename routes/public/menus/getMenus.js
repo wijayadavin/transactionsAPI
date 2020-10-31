@@ -4,25 +4,13 @@ const userPermission = require('../../../controllers/userController');
 
 const router = express.Router();
 
-router.get('/menus',
-// userPermission(['user', 'admin']),
-(req, res) => {
-  const result = getData('menus');
-  if (!result) {
-    return res.status(404).send('Data not found');
-  }
-  return res.render('menus', {menus: result});
-});
-
-router.get('/restaurantID/:menuID',
-// userPermission(['user', 'admin']),
-(req, res) => {
-  console.log(req.params.menuID);
+router.get('/menus/:menuID', userPermission(['user', 'admin']), (req, res) => {
+  const query = req.query;
   const result = getData('menus', {id: req.params.menuID})[0];
   if (!result) {
-    return res.status(404).send('Data not found');
+    res.status(404).send('Data not found');
   }
-  return res.render('menus', {menu: result});
+  res.send(result);
 });
 
 module.exports = router;

@@ -28,7 +28,7 @@ router.post('/admin/orders/items'), userPermission(['admin']), (req, res) => {
   };
 
   // If ok, continue:
-  req.body.id = uid();
+  req.body.id = `/orders/${req.body.orderID}/${uid()}`;
   const result = addData('orderItems', req.body);
 
   if (!result) {

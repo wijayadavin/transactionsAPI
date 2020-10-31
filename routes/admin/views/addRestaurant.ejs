@@ -11,38 +11,20 @@
 
 <body>
   <%- include('partials/nav.ejs') %>
-
   <span class="border">
-    <li class="list-group-item active col-md-4">Add a new Menu to <%= restaurant.name %> here:</li>
-    <form class="px-4 py-3" action="/admin/menus" method="post">
+    <li class="list-group-item active col-md-4">Register as a user here:</li>
+    <form class="px-4 py-3" action="/auth/register" method="post">
+
       <div class="form-group col-md-3">
-        <input type="hidden" id="s-name" name="restaurantID" type="text" value="<%= restaurant.id %>">
+        <input id="s-name" name="name" type="text" class="form-control" placeholder="Restaurant Name">
       </div>
       <div class="form-group col-md-3">
-        <input id="s-name" name="name" type="text" class="form-control" placeholder="Menu Name">
-      </div>
-      <div class="form-group col-md-3">
-        <input id="s-address" name="price" type="text" class="form-control" placeholder="Menu price">
+        <input id="s-address" name="address" type="text" class="form-control" placeholder="Restaurant Address">
       </div>
       <button id="btn-submit" type="submit" class="btn btn-primary">Submit</button>
     </form>
   </span>
 
-  <span class="border">
-    <ul class="list-group">
-      <li class="list-group-item active col-md-4">
-        <h1><%= restaurant.name %> - <%= restaurant.address %></h1>
-        <h2>Menu list:</h2>
-      </li>
-      <% if (!restaurantMenus) { %>
-        There is no menu
-        <% } else { restaurantMenus.forEach(function (restaurantMenu) { %>
-      <li class="list-group-item col-md-4">
-        <%= restaurantMenu.name %> - <%= restaurantMenu.price %>
-      </li>
-      <% })} %>
-    </ul>
-  </span>
 
   <br><br><br><br><br><br><br><br><br><br><br>
 
@@ -58,4 +40,5 @@
     integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
     crossorigin="anonymous"></script>
 </body>
+
 </html>

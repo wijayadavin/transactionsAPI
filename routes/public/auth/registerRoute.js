@@ -23,7 +23,7 @@ router.post('/auth/register', urlencodedParser, (req, res) => {
     }
 
     // if not exist, continue:
-    req.body.id = uid();
+    req.body.id = `/u/${uid()}`;
     if (req.body.username == 'admin') {
       req.body.role = 'admin';
     } else {
