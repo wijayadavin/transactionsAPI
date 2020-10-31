@@ -13,4 +13,12 @@ router.get('/restaurants', userPermission(['user', 'admin']), (req, res) => {
   res.send(result);
 });
 
+router.get('/:restaurantID', userPermission(['user', 'admin']), (req, res) => {
+  const result = getData('restaurants', {id: restaurantID});
+  if (!result) {
+    res.status(404).send('Data not found');
+  }
+  res.render('restaurant-page');
+});
+
 module.exports = router;
