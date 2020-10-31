@@ -5,6 +5,7 @@ const router = express.Router();
 
 
 router.get('/u/:username', (req, res) => {
+  console.log(req);
   const result = getData('users', {username: req.params.username})[0];
   // get username by username as path, return result if found:
   if (result) {
