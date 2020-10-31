@@ -4,21 +4,29 @@ const userPermission = require('../../../controllers/userController');
 const router = express.Router();
 
 
-router.get('/restaurants', userPermission(['user', 'admin']), (req, res) => {
-  const query = req.query;
-  const result = getData('restaurants', query);
-  if (!result) {
+router.get('/restaurants',
+// userPermission(['user', 'admin']),
+(req, res) => {
+  const foundRestaurants = getData('restaurants');
+  if (!foundRestaurants) {
     res.status(404).send('Data not found');
   }
-  res.send(result);
+  res.render('restaurants', {restaurants: foundRestaurants});
 });
 
-router.get('/:restaurantID', userPermission(['user', 'admin']), (req, res) => {
-  const result = getData('restaurants', {id: restaurantID});
-  if (!result) {
+router.get('/:restaurantID',
+// userPermission(['user', 'admin']),
+(req, res) => {
+  const foundRestaurant = getData('restaurants', {id: req.params.restaurantID})[0];
+  if (!foundRestaurant) {
     res.status(404).send('Data not found');
   }
-  res.render('restaurant-page');
+  const foundRestaurantMenus = getData('menus', {restaurantID: req.params.restaurantID});
+  res.render('restaurant-page', {
+    restaurant: foundRestaurant,
+    restaurantMenus: foundRestaurantMenus
+  });
 });
+
 
 module.exports = router;
