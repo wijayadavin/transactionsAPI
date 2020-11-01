@@ -21,7 +21,7 @@ router.get('/:restaurantID/:menuID',
 // userPermission(['user', 'admin']),
 (req, res) => {
   const foundMenu = getData('menus', {id: req.params.menuID})[0];
-  if (!result) {
+  if (!foundMenu) {
     return res.status(404).send('Data not found');
   }
   return res.render('menu-page', {menu: foundMenu});

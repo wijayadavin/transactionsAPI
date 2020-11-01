@@ -4,21 +4,24 @@ const router = express.Router();
 const editData = require('../../../controllers/editController');
 const userPermission = require('../../../controllers/userController');
 const auth = require('../../../middlewares/jwtMiddleware');
+const urlencodedParser = require('body-parser').urlencoded({ extended: false })
 
 
-router.patch('/admin/restaurants', userPermission(['admin']), (req, res) => {
-  const result = editData(
+router.patch('/edit/restaurant',
+urlencodedParser,
+// userPermission(['admin']),
+(req, res) => {
+  const editedRestaurant = editData(
       'restaurants',
-      req.body.id,
+      req.params.restaurantID,
       req.body,
   );
 
-  if (!result) {
-    res.status(400).send('Bad request');
+  if (!editedRestaurant) {
+    return res.status(400).send('Bad request');
   } else {
-    res.send(result);
+    return res.redirect(`/${editedRestaurant.id}`);
   }
-  return;
 });
 
 
