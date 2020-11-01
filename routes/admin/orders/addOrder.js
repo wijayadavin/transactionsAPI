@@ -2,30 +2,29 @@ const express = require('express');
 const addData = require('../../../controllers/addController');
 const getData = require('../../../controllers/getController');
 const uid = require('uid');
-const auth = require('../../../middlewares/jwtMiddleware');
-const app = express.Router();
+const userPermission = require('../../../controllers/userController');
+const router = express.Router();
 
-app.post('/admin/orders',
-    auth.verifyJwt('role: admin'), (req, res) => {
-      // Firstly, let's check if userID is available:
-      const foundUser = getData(
-          'users',
-          {id: req.body.userID});
-      if (!foundUser[0]) {
-        return res.status(404).send('Invalid user ID');
-      };
-      // Secondly, let's check if userID is available:
+router.post('/admin/orders'), userPermission(['admin']), (req, res) => {
+  // Firstly, let's check if userID is available:
+  const foundUser = getData(
+      'users',
+      {id: req.body.userID});
+  if (!foundUser[0]) {
+    return res.status(404).send('Invalid user ID');
+  };
+  // Secondly, let's check if userID is available:
 
-      // If ok, continue:
-      req.body.id = uid();
-      const result = addData('orders', req.body);
+  // If ok, continue:
+  req.body.id = `/orders/${uid()}`;
+  const result = addData('orders', req.body);
 
-      if (!result) {
-        res.status(400).send('Wrong body');
-      } else {
-        res.send(result);
-      }
-      return;
-    });
+  if (!result) {
+    res.status(400).send('Wrong body');
+  } else {
+    res.send(result);
+  }
+  return;
+};
 
-module.exports = app;
+module.exports = router;

@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
 const jwtConfig = require('../jwtConfig');
+const passportJwt = require('passport');
+const BearerStrategy = require('passport-http-bearer').Strategy;
 
 
 /**
@@ -9,7 +11,7 @@ const jwtConfig = require('../jwtConfig');
  *
  *    const payload = {
  *    id: result[0].id,
- *    permissions: 'role: admin',
+ *    permissions: 'userLevel: 2',
  *    };
  *    const token = signJwt(payload)
  *
@@ -27,96 +29,34 @@ function signJwt(data) {
   return token;
 }
 
+passportJwt.serializeUser(function(user, done) {
+  console.log('serializeUser');
+  return done(null, user);
+});
 
-/**
- * A function to accept a request either from header or query
- * @param {Object} req - the incoming request object
- * @return {Object|null} - return the object if found the token\
- * or else return null
- */
-function fromHeaderOrQuerystring(req) {
-  if (req.headers.authorization &&
-    req.headers.authorization.split(' ')[0] === 'Bearer') {
-    return req.headers.authorization.split(' ')[1];
-  } else if (req.query && req.query.token) {
-    return req.query.token;
-  }
-  return null;
-}
+passportJwt.deserializeUser(function(user, done) {
+  console.log('deserializeUser');
+  return done(null, user);
+});
 
-
-/**
- * Verify jwt token
- *
- * Usage example in router :
- *
- *    app.post('/admin/menus',
- *    auth.verifyJwt('role: admin'), (req, res) => {}
- *
- * this example means the /admin/menus route
- * may only be accessed by user with permission: 'role: admin'
- * permission will be declared automatically in login
- *
- * @param {String|Array} credentials the credentials required
- * @return {any} if the permission is okay, \
- * returns decodedPayload into req.user and next()
- */
-function verifyJwt(credentials = []) {
-  return (req, res, next) => {
-    // Convert string credentials into array:
-    if (typeof credentials === 'string') {
-      credentials = [credentials];
-    }
-    // Allow request from header or query:
-    const token = fromHeaderOrQuerystring(req);
+passportJwt.use(new BearerStrategy(
+    function(token, done) {
+      jwt.verify(token, jwtConfig.secret, (err, user) => {
+        console.log(user);
+        // if error, return error:
+        if (err) {
+          return done(err);
+        }
+        // if not authorized, return false:
+        if (!user) {
+          return done(null, false);
+        }
+        // if all is ok, return user payload
+        return done(null, user);
+      });
+    },
+))
 
 
-    try {
-      if (!token) {
-        // If no token:
-        res.status(401).send('Error: access denied');
-      } else {
-      // If token available, verify the token:
-        jwt.verify(token, jwtConfig.secret, (err, decodedPayload) => {
-        // If error:
-          if (err) {
-            return res.status(401).send(err);
-          }
-          // If no error, then continue:
-          if (credentials.length > 0) {
-            // If credentials is not null, continue to check the permision:
-            if (
-            // 1. The permission must be not a falsy:
-              decodedPayload.permissions &&
-            // 2. The permission must be not empty:
-            decodedPayload.permissions.length &&
-            // 3. The permission must has the required credentials:
-            credentials.some(
-                (credential) => decodedPayload.permissions.indexOf(
-                    credential,
-                ) >= 0,
-            )
-            ) { // The Permission from the token is okay:
-              req.user = decodedPayload;
-              next();
-            } else {
-            // The Permission from the token is not okay:
-              return res.status(401).send('Error: access denied');
-            }
-          } else {
-          // If no credentials needed:
-            req.user = decodedPayload;
-            next();
-          }
-        });
-      }
-    } catch (err) {
-      // catch any unknown error and response with:
-      return res.status(500).send(err.message);
-    }
-  };
-};
-
-
-const jwtFunctions = {signJwt, verifyJwt};
+const jwtFunctions = {signJwt, passportJwt};
 module.exports = jwtFunctions;

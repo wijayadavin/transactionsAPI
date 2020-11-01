@@ -1,20 +1,18 @@
 const express = require('express');
+const userPermission = require('../../../../controllers/userController');
 const removeData = require('../../../../controllers/removeController');
-const auth = require('../../../../middlewares/jwtMiddleware');
-const app = express.Router();
+const router = express.Router();
 
-app.delete(
-    '/admin/orders/items',
-    auth.verifyJwt('role: admin'), (req, res) => {
-      const result = removeData.removeDataByQuery('orderItems', req.query);
+router.delete('/admin/orders/items'),
+userPermission(['admin']), (req, res) => {
+  const result = removeData.removeDataByQuery('orderItems', req.query);
 
-      if (result) {
-        res.send('order has been deleted');
-      } else {
-        res.status(400).send('not found');
-      }
-      return;
-    },
-);
+  if (result) {
+    res.send('order has been deleted');
+  } else {
+    res.status(400).send('not found');
+  }
+  return;
+};
 
-module.exports = app;
+module.exports = router;

@@ -1,9 +1,10 @@
 const express = require('express');
 const editData = require('../../../../controllers/editController');
-const auth = require('../../../../middlewares/jwtMiddleware');
-const app = express.Router();
+const userPermission = require('../../../../controllers/userController');
+const router = express.Router();
 
-app.patch('/admin/orders/items', auth.verifyJwt('role: admin'), (req, res) => {
+router.patch('/admin/orders/items'),
+userPermission(['admin']), (req, res) => {
   const result = editData(
       'orderItems',
       req.query.id,
@@ -16,6 +17,6 @@ app.patch('/admin/orders/items', auth.verifyJwt('role: admin'), (req, res) => {
     res.send(result);
   }
   return;
-});
+};
 
-module.exports = app;
+module.exports = router;

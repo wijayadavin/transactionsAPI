@@ -1,22 +1,21 @@
 const express = require('express');
 const editData = require('../../../controllers/editController');
-const auth = require('../../../middlewares/jwtMiddleware');
-const app = express.Router();
+const userPermission = require('../../../controllers/userController');
+const router = express.Router();
 
-app.patch('/admin/orders',
-    auth.verifyJwt('role: admin'), (req, res) => {
-      const result = editData(
-          'orders',
-          req.query.id,
-          req.body,
-      );
+router.patch('/admin/orders'), userPermission(['admin']), (req, res) => {
+  const result = editData(
+      'orders',
+      req.query.id,
+      req.body,
+  );
 
-      if (!result) {
-        res.status(400).send('Bad request');
-      } else {
-        res.send(result);
-      }
-      return;
-    });
+  if (!result) {
+    res.status(400).send('Bad request');
+  } else {
+    res.send(result);
+  }
+  return;
+};
 
-module.exports = app;
+module.exports = router;

@@ -1,17 +1,17 @@
 const express = require('express');
 const getData = require('../../../../controllers/getController');
-const auth = require('../../../../middlewares/jwtMiddleware');
-const app = express.Router();
+const userPermission = require('../../../../controllers/userController');
+const router = express.Router();
 
-app.get('/admin/orders/items',
-    auth.verifyJwt('role: admin'), (req, res) => {
-      const result = getData('orderItems', req.query);
+router.get('/admin/orders/items'),
+userPermission(['admin']), (req, res) => {
+  const result = getData('orderItems', req.query);
 
-      if (result) {
-        res.send(result);
-      } else {
-        es.status(404).send('not found');
-      }
-    });
+  if (result) {
+    res.send(result);
+  } else {
+    es.status(404).send('not found');
+  }
+};
 
-module.exports = app;
+module.exports = router;

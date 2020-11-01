@@ -1,11 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const getData = require('../../controllers/getController');
-const editData = require('../../controllers/editController');
-const auth = require('../../middlewares/jwtMiddleware');
+const getData = require('../../../controllers/getController');
+const editData = require('../../../controllers/editController');
+const auth = require('../../../middlewares/jwtMiddleware');
+const userPermission = require('../../../controllers/userController');
+
 
 router.patch('/u/:username',
-    auth.verifyJwt('role: user'), (req, res) => {
+    userPermission(['user', 'admin']), (req, res) => {
       // Check param if found or not
       const foundUser = getData('users', {id: req.user.id}[0]);
       if (!foundUser || foundUser.length == 0) {
